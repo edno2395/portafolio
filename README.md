@@ -15,7 +15,3 @@ Este es mi portafolio web donde muestro mis proyectos, habilidades y experiencia
 - JavaScript
 - Bootstrap 5
 - EmailJS para el envío de correos
-
-## Instalación
-Para ejecutar este proyecto en tu máquina local, sigue estos pasos:
-
