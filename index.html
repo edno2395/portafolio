@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio Ing. Nole Yacila Eder Humberto</title>
+	<!--favicon-->
+	<link rel="icon" href="https://res.cloudinary.com/dirukaz36/image/upload/v1728250136/icono_dv3mho.svg" type="image/png" />
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="dist/css/bootstrap.min.css" >
+    <!-- Font Awesome para los iconos de redes sociales -->
+    <link rel="stylesheet" href="dist/fontawesome/css/all.min.css" >
+		<!-- sweetalert2 CSS -->
+	<link rel="stylesheet" href="dist/sweetalert2/sweetalert2_theme-borderless_borderless.css" />
+	<link rel="stylesheet" href="dist/sweetalert2/animation/animate.min.css" />
+	<!-- Estilos -->
+	<link rel="stylesheet" href="dist/css/style.css" >
+
+
+</head>
+<body>
+
+    <div class="card custom-card">
+        <nav class="navbar navbar-expand-lg navbar-custom bg-secondary bg-gradient">
+            <div class="container-fluid">
+                <a class="navbar-brand text-white font-monospace text-wrap fst-italic lh-base" href="./">Mi Portafolio</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-bars fa-xl" style="color: white;"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="mostrarSobreMi(event)">SOBRE MÍ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="mostrarProyectos(event)">PROYECTOS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="mostrarContacto(event)">CONTACTO</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="card-body" id="contenido">
+            <h5 class="card-title fw-bold font-monospace text-wrap fst-italic lh-base">Sobre mí</h5> 
+			<p class="card-text font-monospace text-wrap fst-italic lh-base">
+				¡Bienvenido a mi portafolio! Soy Ingeniero de Sistemas titulado de la Universidad Católica los Ángeles de Chimbote – Sede Sullana. Soy un innovador en la implementación de nuevas tecnologías y en la creación de soluciones informáticas que satisfacen las necesidades del negocio. Manejo PHP, POO, JavaScript, HTML, CSS, y gestores de bases de datos como MySQL, SQL Server y PL/SQL Oracle.
+			</p>
+			<p class="card-text font-monospace text-wrap fst-italic lh-base">
+				Apasionado por el desarrollo web, busco nuevos retos y disfruto creando aplicaciones dinámicas con código eficiente y mantenible.
+			</p>
+			<p class="card-text font-monospace text-wrap fst-italic lh-base">
+				Me encanta colaborar en proyectos, aprender de los demás y mantenerme actualizado con las tendencias en el desarrollo. Te invito a explorar mis proyectos a continuación.
+			</p>
+			<!-- Iconos de redes sociales -->
+            <div class="social-icons">
+                <a href="https://www.facebook.com/ederhumber" target="_blank" style="margin-right: 7px; text-decoration: none;"><i class="fab fa-facebook fa-2x" style="color: #3b5998;" onmouseover="this.style.transform='scale(1.2)';" onmouseout="this.style.transform='scale(1)';"></i></a>
+                <a href="https://www.instagram.com/noleeder/" target="_blank" style="margin-right: 7px; text-decoration: none;"><i class="fab fa-instagram fa-2x" style="color: #e4405f;" onmouseover="this.style.transform='scale(1.2)';" onmouseout="this.style.transform='scale(1)';"></i></a>
+                <a href="mailto:ehumberto.23@hotmail.com" target="_blank" style="margin-right: 7px; text-decoration: none;"><img src="https://res.cloudinary.com/dirukaz36/image/upload/v1727741049/outlook_a1ll4a.svg" alt="Outlook" style="width: 36px; height: 40px;padding-bottom: 14px;" onmouseover="this.style.transform='scale(1.2)';" onmouseout="this.style.transform='scale(1)';"></a>
+                <a href="https://www.linkedin.com/in/eder-humberto-nole-yacila-420260103" target="_blank" style=" text-decoration: none;"><i class="fab fa-linkedin fa-2x" style="color: #0077b5;" onmouseover="this.style.transform='scale(1.2)';" onmouseout="this.style.transform='scale(1)';"></i></a>
+        
+			</div>
+        </div>
+		
+        <div class="card-body d-none" id="formularioContacto">
+            <h5 class="card-title fw-bold font-monospace text-wrap fst-italic lh-base">Contacto</h5>
+            <form id="contactFormulario"  autocomplete="off" >
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" name="nombre" id="nombre" >
+                </div>
+                <div class="mb-3">
+                    <label for="mensaje" class="form-label">Mensaje</label>
+                    <textarea class="form-control" id="mensaje" name="mensaje" rows="3" maxlength="200" style="resize: none;" ></textarea>
+                 <span style="color: #555555;font-style: italic;" id="contador">200 caracteres restantes </span>
+				</div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+        </div>
+
+        <div class="card-body d-none " id="contenidoProyectos">
+            <h5 class="card-title fw-bold font-monospace text-wrap fst-italic lh-base">Proyectos</h5>
+            <div class="row d-flex overflow-auto flex-nowrap">
+			
+                <div class="col-auto">
+                   <div class="card" style="width: 14rem; heigth: 12rem">
+				    <div id="carouselproyecto1" class="carousel slide" data-bs-ride="carousel">
+					  <div class="carousel-inner">
+						<div class="carousel-item active">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728176167/imagen1_gmwxsg.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728176405/imagen2_s3eauz.webp"  class="d-block w-100" alt="">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728176344/imagen3_jdi6ue.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728176392/imagen4_gusvwi.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728176343/imagen5_snqizf.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728176341/imagen6_vgmvzn.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728176341/imagen7_bzr0mb.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728176340/imagen8_g4yblr.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728176437/imagen9_wfofgf.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728176437/imagen10_1_g4pzez.webp" class="d-block w-100" alt="...">
+						</div>
+					  </div>
+					  <button class="carousel-control-prev" type="button" data-bs-target="#carouselproyecto1" data-bs-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Atras</span>
+					  </button>
+					  <button class="carousel-control-next" type="button" data-bs-target="#carouselproyecto1" data-bs-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Siguiente</span>
+					  </button>
+					</div>
+				  <div class="card-body" >
+				  <h6 class="card-title fw-bold text-justify">Sistema de Gestión de Ventas Restaurante:</h6>
+				  <p class="card-text fs-6 mb-0 " style=" margin-bottom: 0; line-height: 1.4;white-space: normal;">Sistema integral que gestiona caja, stock, clientes, proveedores, ventas, mesas, delivery y boletas electrónicas (SUNAT).</p>
+				  <a href="javascript:void(0);" class="btn bg-secondary bg-gradient text-white mt-2 hover-effect" onclick="openCarousel(1)" >Ver Más</a> <!-- Botón agregado -->
+				</div>
+			  </div>
+             </div>
+				
+				  <div class="col-auto">
+                   <div class="card" style="width: 14rem; heigth: 12rem">
+				    <div id="carouselproyecto2" class="carousel slide" data-bs-ride="carousel">
+					  <div class="carousel-inner">
+						<div class="carousel-item active">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728179984/imagen1_vhzs1w.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728179984/imagen2_fdfkpp.webp"  class="d-block w-100" alt="">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728179984/imagen3_trbn70.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728179984/imagen4_hvawxi.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728179983/imagen5_vyedlo.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728179983/imagen6_ujxpsv.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728179983/imagen7_ovllrh.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728179983/imagen8_y6toyb.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728179983/imagen9_clws0c.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728179983/imagen10_ene55t.webp" class="d-block w-100" alt="...">
+						</div>
+					  </div>
+					  <button class="carousel-control-prev" type="button" data-bs-target="#carouselproyecto2" data-bs-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Atras</span>
+					  </button>
+					  <button class="carousel-control-next" type="button" data-bs-target="#carouselproyecto2" data-bs-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Siguiente</span>
+					  </button>
+					</div>
+				  <div class="card-body" >
+				  <h6 class="card-title fw-bold text-justify">Sistema de Gestión de Ventas Tienda Abarrotes:</h6>
+				  <p class="card-text fs-6 mb-0 " style=" margin-bottom: 0; line-height: 1.4;white-space: normal;">Sistema eficiente para tiendas de abarrotes que escanea códigos, imprime tickets, controla stock y ofrece seguridad al acceso.</p>
+				  <a href="javascript:void(0);" class="btn bg-secondary bg-gradient text-white mt-2 hover-effect" onclick="openCarousel(2)">Ver Más</a> <!-- Botón agregado -->
+				</div>
+			  </div>
+             </div>
+				  
+				
+				
+				 <div class="col-auto">
+                   <div class="card" style="width: 14rem; heigth: 12rem">
+				    <div id="carouselproyecto3" class="carousel slide" data-bs-ride="carousel">
+					  <div class="carousel-inner">
+						<div class="carousel-item active">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728181285/imagen1_n2hs4v.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728181285/imagen2_s8b2u6.webp"  class="d-block w-100" alt="">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728181285/imagen3_n1kzga.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728181285/imagen4_ckrhyn.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728181285/imagen5_kyjknp.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728181432/imagen6_yhuhl1.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728181432/imagen7_ngcsgd.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728181432/imagen8_vrzgoh.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728181431/imagen9_hqndme.webp" class="d-block w-100" alt="...">
+						</div>
+					  </div>
+					  <button class="carousel-control-prev" type="button" data-bs-target="#carouselproyecto3" data-bs-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Atras</span>
+					  </button>
+					  <button class="carousel-control-next" type="button" data-bs-target="#carouselproyecto3" data-bs-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Siguiente</span>
+					  </button>
+					</div>
+				  <div class="card-body" >
+				  <h6 class="card-title fw-bold text-justify">Lading Page :</h6>
+				  <p class="card-text fs-6 mb-0 " style=" margin-bottom: 0; line-height: 1.4;white-space: normal;">Landing page realizada en HTML y CSS, dedicada a ofrecer baterías de calidad, asesoría y promociones para todos tus dispositivos.</p>
+				  <a href="javascript:void(0);" class="btn bg-secondary bg-gradient text-white mt-2 hover-effect" onclick="openCarousel(3)">Ver Más</a> <!-- Botón agregado -->
+				</div>
+			  </div>
+             </div>
+			 
+			 
+			  <div class="col-auto">
+                   <div class="card" style="width: 14rem; heigth: 12rem">
+				    <div id="carouselproyecto4" class="carousel slide" data-bs-ride="carousel">
+					  <div class="carousel-inner">
+						<div class="carousel-item active">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728182511/imagen1_pxsjnv.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728182509/imagen2_e8ut7r.webp"  class="d-block w-100" alt="">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728182508/imagen3_q9fkao.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728182506/imagen4_q7mee5.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728182506/imagen5_qogufl.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728182504/imagen6_onbo4t.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728182503/imagen7_bi4iqt.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728182503/imagen8_uwotux.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728182503/imagen9_no6eh0.webp" class="d-block w-100" alt="...">
+						</div>
+					  </div>
+					  <button class="carousel-control-prev" type="button" data-bs-target="#carouselproyecto4" data-bs-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Atras</span>
+					  </button>
+					  <button class="carousel-control-next" type="button" data-bs-target="#carouselproyecto4" data-bs-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Siguiente</span>
+					  </button>
+					</div>
+				  <div class="card-body" >
+				  <h6 class="card-title fw-bold text-justify">Sistema para centro de salud :</h6>
+				  <p class="card-text fs-6 mb-0 " style=" margin-bottom: 0; line-height: 1.4;white-space: normal;">Pequeño sistema de ingresos de datos para un centro de salud, creado con HTML, CSS, PHP y AJAX, que garantiza alta seguridad en accesos.</p>
+				  <a href="javascript:void(0);" class="btn bg-secondary bg-gradient text-white mt-2 hover-effect" onclick="openCarousel(4)">Ver Más</a> <!-- Botón agregado -->
+				</div>
+			  </div>
+             </div>
+				
+
+                <div class="col-auto">
+                   <div class="card" style="width: 14rem; heigth: 12rem">
+				    <div id="carouselproyecto5" class="carousel slide" data-bs-ride="carousel">
+					  <div class="carousel-inner">
+						<div class="carousel-item active">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728195418/imagen1_s7aptp.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728195417/imagen2_pw1dfg.webp"  class="d-block w-100" alt="">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728195416/imagen3_itecgg.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728195414/imagen4_tuqucq.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728195414/imagen5_ufrl6b.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728195414/imagen6_ieeah9.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728195413/imagen7_do3d04.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728195409/imagen8_fexcci.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728195410/imagen9_r9d10k.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728195409/imagen10_mmjkgz.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728195409/imagen11_jrjwuv.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728195409/imagen12_c4mtow.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728195409/imagen13_je902f.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728195409/imagen14_u1x7hh.webp" class="d-block w-100" alt="...">
+						</div>
+						<div class="carousel-item">
+						  <img src="https://res.cloudinary.com/dirukaz36/image/upload/v1728195409/imagen15_uxcmf5.webp" class="d-block w-100" alt="...">
+						</div>
+					  </div>
+					  <button class="carousel-control-prev" type="button" data-bs-target="#carouselproyecto5" data-bs-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Atras</span>
+					  </button>
+					  <button class="carousel-control-next" type="button" data-bs-target="#carouselproyecto5" data-bs-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Siguiente</span>
+					  </button>
+					</div>
+				  <div class="card-body" >
+				  <h6 class="card-title fw-bold text-justify">Sistema Escalafon (Ugel Sullana) :</h6>
+				  <p class="card-text fs-6 mb-0 " style=" margin-bottom: 0; line-height: 1.4;white-space: normal;">Desarrollado en PHP, HTML, JavaScript, Bootstrap, jQuery y MySQL, con seguridad en accesos en usuarios.</p>
+				  <a href="javascript:void(0);" class="btn bg-secondary bg-gradient text-white mt-2 hover-effect" onclick="openCarousel(5)">Ver Más</a> <!-- Botón agregado -->
+				</div>
+			  </div>
+             </div>
+			 
+
+            </div>
+        </div>
+	
+    </div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalCarousel" tabindex="-1" aria-labelledby="modalCarouselLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fw-bold font-monospace text-wrap fst-italic lh-base" id="modalCarouselLabel">Imágenes del Proyecto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="carouselImages" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner" id="carouselInner">
+            <!-- Las imágenes se cargarán aquí mediante JavaScript -->
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselImages" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Atras</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselImages" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Siguiente</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Bootstrap 5 JS -->
+    <script type="text/javascript"  src="dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Font Awesome -->
+    <script  type="text/javascript" src="dist/fontawesome/js/all.min.js"></script>
+	<!-- Codigo EmailJS -->
+    <script type="text/javascript" src="dist/emailjs/email.min.js"></script>
+	<!-- Codigo Sweetalert2 -->
+    <script type="text/javascript" src="dist/sweetalert2/sweetalert2.min.js"></script>
+	 <!-- Codigo Javascript -->
+    <script type="text/javascript"  src="dist/js/main.js"></script>
+
+
+</body>
+</html>
