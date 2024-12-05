@@ -147,13 +147,20 @@ body {
 
 /* Cambiar el color de las flechas a #6c757d */
 .carousel-control-prev-icon::after {
-    content: '◀'; /* Usar un símbolo como flecha */
+    content: '\25C0'; /* Código Unicode para la flecha hacia la izquierda */
+    font-size: 24px;  /* Tamaño de la flecha */
+    color: #6c757d;   /* Color de la flecha */
+}
+
+.carousel-control-next-icon::after {
+    content: '\25B6';  /* Usar un símbolo como flecha */
     font-size: 24px; /* Tamaño de la flecha */
     color: #6c757d; /* Color de la flecha */
 }
 
-.carousel-control-next-icon::after {
-    content: '▶'; /* Usar un símbolo como flecha */
-    font-size: 24px; /* Tamaño de la flecha */
-    color: #6c757d; /* Color de la flecha */
+input[readonly], textarea[readonly] {
+    background-color: #f0f0f0; /* Color de fondo opaco */
+    color: #777; /* Color de texto más claro para indicar solo lectura */
+    cursor: not-allowed; /* Cambia el cursor a "no permitido" */
 }
+
