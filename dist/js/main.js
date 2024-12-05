@@ -18,6 +18,15 @@
 		});
 
 
+		function verificaletrasInput(m) {
+			var permitidoletras = /[^a-zA-Z\u00E0-\u00FC\u00C0-\u00DC\u00f1\u00d1 .]/;
+			if (permitidoletras.test(m.value)) {
+				Alerta('warning', 'Advertencia!', 'Campo nombre no acepta numeros', 2100);
+			  m.value = m.value.replace(/[^a-zA-Z\u00E0-\u00FC\u00C0-\u00DC\u00f1\u00d1 .]/g, ''); // Elimina caracteres no válidos
+			  m.focus();
+			}
+		  }
+		  
 		
         function mostrarSobreMi(event) {
             event.preventDefault();
@@ -128,7 +137,17 @@
     modal.show();
 }
 
+function deshabilitarCampos() {
+	document.getElementById('nombre').readOnly = true;
+	document.getElementById('mensaje').readOnly = true;
+	document.getElementById('Enviar').disabled  = true;
+}
 
+function habilitarCampos() {
+	document.getElementById('nombre').readOnly = false;
+	document.getElementById('mensaje').readOnly = false;
+	document.getElementById('Enviar').disabled  = false;
+}
 
 document.getElementById('mensaje').addEventListener('input', function() {
         let value = this.value;
@@ -153,28 +172,28 @@ document.getElementById('mensaje').addEventListener('input', function() {
 
 			// Validaciones
 			if (nombre === '') {
-				Alerta('warning', 'Advertencia!', 'Complete los campos', 2100);
+				Alerta('warning', 'Advertencia!', 'Complete todos los campos', 2200);
 				return false;
 			}
 			if (nombre.length < 10) {
-				Alerta('warning', 'Advertencia!', 'El nombre debe tener al menos 10 caracteres.', 2100);
+				Alerta('warning', 'Advertencia!', 'El campo nombre debe tener al menos 10 caracteres.', 2200);
 				return false;
 			}
 			if (mensaje === '') {
-				Alerta('warning', 'Advertencia!', 'Complete los campos', 2100);
+				Alerta('warning', 'Advertencia!', 'Complete todos los campos', 2200);
 				return false;
 			}
 			if (mensaje.length < 10) {
-				Alerta('warning', 'Advertencia!', 'El mensaje debe tener al menos 10 caracteres', 2100);
+				Alerta('warning', 'Advertencia!', 'El campo mensaje debe tener al menos 10 caracteres', 2200);
 				return false;
 			}
-
+			deshabilitarCampos();
 			// SweetAlert con tres opciones
 			Swal.fire({
 				toast: true,
 				position: 'top',
-				title: '¿Cómo deseas contactar?',
-				text: "Elige una opción para continuar:",
+				title: '&#191;C&oacute;mo deseas contactar?',
+				html: "Elige una opci&oacute;n para continuar:",
 				icon: 'question',
 				showCancelButton: true,
 				confirmButtonText: '<i class="fas fa-envelope"></i> Correo',
@@ -189,29 +208,33 @@ document.getElementById('mensaje').addEventListener('input', function() {
 					// Lógica para enviar el correo
 					emailjs.sendForm('service_gc9k6xd', 'template_xnothc7', document.getElementById('contactFormulario'))
 						.then(function() {
-							Alerta('success', 'Éxito!', 'Correo enviado correctamente.', 2200);
+							Alerta('success', '&Eacute;xito!', 'Correo enviado correctamente.', 2400);
 							// Limpiar el formulario después de enviar
 							document.getElementById('contactFormulario').reset();
 							// Resetea el contador de caracteres (si lo tienes)
 							document.getElementById('contador').innerText = '200 caracteres restantes';
+							habilitarCampos();
 						}, function(error) {
 							console.error('Error al enviar el correo:', error);
-							Alerta('error', 'Error!', 'Error al enviar el correo', 2200);
+							Alerta('error', 'Error!', 'Error al enviar el correo', 2400);
+							habilitarCampos();
 						});
 				} else if (result.isDenied) {
 					// Lógica para enviar el WhatsApp
 					const telefono = '+51973502271'; // Número de teléfono de destino
 					// Redirecciona a WhatsApp con el mensaje
-					const url = `https://wa.me/${telefono}?text=Hola, mi nombre es ${nombre}. ${mensaje}`;
+					const url = `https://wa.me/${telefono}?text=Hola, e visto tu portafolio y me estoy contactando contigo, mi nombre es ${nombre}. ${mensaje}`;
 					 //window.open(url, '_blank'); Abre el WhatsApp en una nueva pestaña
 					window.open(url,'Conctamos whatsapp','width=600,height=400,left=50,top=50,toolbar=yes');
 					document.getElementById('contactFormulario').reset();
 					document.getElementById('contador').innerText = '200 caracteres restantes';
+					habilitarCampos();
 				} else if (result.dismiss === Swal.DismissReason.cancel) {
 					// Limpiar el formulario al cancelar
-					Alerta('info', 'Cancelado!', 'Formulario cancelado.', 2200);
+					Alerta('info', 'Cancelado!', 'Formulario cancelado.', 2400);
 					document.getElementById('contactFormulario').reset();
 					document.getElementById('contador').innerText = '200 caracteres restantes';
+					habilitarCampos();
 				}
 			});
 		});
@@ -248,4 +271,4 @@ document.getElementById('mensaje').addEventListener('input', function() {
 			  });
 		}
 		
-		
+				
