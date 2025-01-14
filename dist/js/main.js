@@ -1,5 +1,48 @@
 
+		
 		document.addEventListener("DOMContentLoaded", function() {
+
+			const whatsappIcon = document.createElement("div");
+			whatsappIcon.id = "whatsapp-icon";
+			whatsappIcon.innerHTML = `
+			  <a href="https://wa.me/+51973502271" target="_blank" aria-label="Contactar por WhatsApp">
+				<i class="fab fa-whatsapp fa-bounce"></i>
+			  </a>`;
+			document.body.appendChild(whatsappIcon);
+		  
+			const style = document.createElement("style");
+			style.innerHTML = `
+			 
+			  #whatsapp-icon {
+				position: fixed;
+				bottom: 20px;
+				right: 20px;
+				z-index: 1000;
+				background: linear-gradient(45deg, #25d366, #128c7e);
+				border-radius: 50%;
+				width: 60px;
+				height: 60px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+				cursor: pointer;
+				transition: transform 0.3s ease, box-shadow 0.3s ease;
+			  }
+		  
+			  #whatsapp-icon:hover {
+				transform: scale(1.1);
+				box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+			  }
+		  
+			  #whatsapp-icon a {
+				color: white;
+				font-size: 30px;
+				text-decoration: none;
+			  }
+			`;
+			document.head.appendChild(style);
+
 			var mensaje = document.getElementById("mensaje");
 			var contador = document.getElementById("contador");
 
@@ -16,6 +59,8 @@
 				}
 			});
 		});
+
+
 
 
 		function verificaletrasInput(m) {
