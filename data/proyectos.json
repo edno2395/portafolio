@@ -3,7 +3,7 @@
     "id": "proyecto-1793376966311",
     "title": "Automatizacion Gestión de Asientos Contables",
     "description": "Se desarrollo en Python para automatizar procesos contables mensuales, realizar cruces y controles, generar reportes personalizados y respaldar información, con seguimiento e historial por período.",
-    "category": "sistemas",
+    "category": "automatizacion",
     "technologies": "Python-Reportes-Excel-PDF/DOCX",
     "images": [
       "assets/proyectos/captura-1793376781512-k63q5.webp",
@@ -27,7 +27,7 @@
     "id": "proyecto-1793378159768",
     "title": "Sistema de Carga Masiva de Datos a Oracle – SQL*Loader",
     "description": "Aplicación desarrollada en Python para automatizar la carga masiva de archivos CSV, TXT y TSV a Oracle mediante SQL*Loader, con validación de estructuras, generación de archivos CTL, creación automática de tablas y monitoreo del procesamiento en tiempo real.",
-    "category": "sistemas",
+    "category": "automatizacion",
     "technologies": "Python-Oracle Database-SQL*Loader-CTL-CSV / TXT / TSV",
     "images": [
       "assets/proyectos/captura-1793378138195-iwd5x.webp"
