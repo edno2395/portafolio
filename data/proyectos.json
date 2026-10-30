@@ -46,6 +46,17 @@
     "featured": true
   },
   {
+    "id": "proyecto-1793392186895",
+    "title": "Bot de Consulta y Validación de Líneas – OSIPTEL",
+    "description": "Bot desarrollado en Python para automatizar consultas en el portal OSIPTEL, comparar información de líneas telefónicas con registros de Excel, identificar coincidencias y diferencias, y generar reportes de validación con resultados y observaciones.",
+    "category": "automatizacion",
+    "technologies": "Python-Playwright-Pandas-Automatización web",
+    "images": [
+      "assets/proyectos/captura-1793392172124-kakuo.png"
+    ],
+    "featured": true
+  },
+  {
     "id": "proyecto-1793391542764",
     "title": "Convertidor Masivo de Excel a TXT",
     "description": "Aplicación desarrollada para automatizar la conversión de archivos Excel (XLSX) a formato TXT, permitiendo seleccionar archivos, configurar columnas, establecer la carpeta de destino y monitorear el progreso del procesamiento.",
