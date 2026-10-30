@@ -46,6 +46,17 @@
     "featured": true
   },
   {
+    "id": "proyecto-1793391542764",
+    "title": "Convertidor Masivo de Excel a TXT",
+    "description": "Aplicación desarrollada para automatizar la conversión de archivos Excel (XLSX) a formato TXT, permitiendo seleccionar archivos, configurar columnas, establecer la carpeta de destino y monitorear el progreso del procesamiento.",
+    "category": "automatizacion",
+    "technologies": "Python",
+    "images": [
+      "assets/proyectos/captura-1793391538298-kgk0q.png"
+    ],
+    "featured": true
+  },
+  {
     "id": "proyecto-5",
     "title": "Sistema Escalafón (UGEL Sullana)",
     "description": "Desarrollado en PHP, HTML, JavaScript, Bootstrap, jQuery y MySQL, con seguridad en accesos en usuarios.",
