@@ -1,0 +1,105 @@
+[
+  {
+    "title": "Sistema de Gestión de Ventas Restaurante",
+    "images": [
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728176167/imagen1_gmwxsg.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728176405/imagen2_s3eauz.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728176344/imagen3_jdi6ue.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728176392/imagen4_gusvwi.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728176343/imagen5_snqizf.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728176341/imagen6_vgmvzn.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728176341/imagen7_bzr0mb.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728176340/imagen8_g4yblr.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728176437/imagen9_wfofgf.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728176437/imagen10_1_g4pzez.webp"
+    ],
+    "id": "proyecto-1",
+    "description": "Sistema integral que gestiona caja, stock, clientes, proveedores, ventas, mesas, delivery y boletas electrónicas (SUNAT).",
+    "category": "sistemas",
+    "technologies": "",
+    "featured": true
+  },
+  {
+    "title": "Sistema de Gestión de Ventas Tienda Abarrotes",
+    "images": [
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728179984/imagen1_vhzs1w.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728179984/imagen2_fdfkpp.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728179984/imagen3_trbn70.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728179984/imagen4_hvawxi.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728179983/imagen5_vyedlo.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728179983/imagen6_ujxpsv.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728179983/imagen7_ovllrh.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728179983/imagen8_y6toyb.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728179983/imagen9_clws0c.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728179983/imagen10_ene55t.webp"
+    ],
+    "id": "proyecto-2",
+    "description": "Sistema eficiente para tiendas de abarrotes que escanea códigos, imprime tickets, controla stock y ofrece seguridad al acceso.",
+    "category": "sistemas",
+    "technologies": "",
+    "featured": true
+  },
+  {
+    "title": "Landing Page",
+    "images": [
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728181285/imagen1_n2hs4v.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728181285/imagen2_s8b2u6.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728181285/imagen3_n1kzga.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728181285/imagen4_ckrhyn.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728181285/imagen5_kyjknp.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728181432/imagen6_yhuhl1.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728181432/imagen7_ngcsgd.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728181432/imagen8_vrzgoh.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728181431/imagen9_hqndme.webp"
+    ],
+    "id": "proyecto-3",
+    "description": "Landing page realizada en HTML y CSS, dedicada a ofrecer baterías de calidad, asesoría y promociones para todos tus dispositivos.",
+    "category": "web",
+    "technologies": "",
+    "featured": true
+  },
+  {
+    "title": "Sistema para centro de salud",
+    "images": [
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728182511/imagen1_pxsjnv.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728182509/imagen2_e8ut7r.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728182508/imagen3_q9fkao.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728182506/imagen4_q7mee5.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728182506/imagen5_qogufl.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728182504/imagen6_onbo4t.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728182503/imagen7_bi4iqt.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728182503/imagen8_uwotux.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728182503/imagen9_no6eh0.webp"
+    ],
+    "id": "proyecto-4",
+    "description": "Pequeño sistema de ingresos de datos para un centro de salud, creado con HTML, CSS, PHP y AJAX, que garantiza alta seguridad en accesos.",
+    "category": "sistemas",
+    "technologies": "",
+    "featured": true
+  },
+  {
+    "title": "Sistema Escalafón (UGEL Sullana)",
+    "images": [
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195418/imagen1_s7aptp.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195417/imagen2_pw1dfg.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195416/imagen3_itecgg.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195414/imagen4_tuqucq.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195414/imagen5_ufrl6b.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195414/imagen6_ieeah9.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195413/imagen7_do3d04.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195409/imagen8_fexcci.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195410/imagen9_r9d10k.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195409/imagen10_mmjkgz.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195409/imagen11_jrjwuv.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195409/imagen12_c4mtow.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195409/imagen13_je902f.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195409/imagen14_u1x7hh.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195409/imagen15_uxcmf5.webp"
+    ],
+    "id": "proyecto-5",
+    "description": "Desarrollado en PHP, HTML, JavaScript, Bootstrap, jQuery y MySQL, con seguridad en accesos en usuarios.",
+    "category": "sistemas",
+    "technologies": "",
+    "featured": true
+  }
+]
