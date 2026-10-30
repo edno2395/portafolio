@@ -1,166 +1,41 @@
-body {
-    /* Establece la altura del body al 100% del viewport */
-    height: 100%;
-    /* Elimina el margen predeterminado del body */
-    margin: 0;
-    /* Utiliza Flexbox para alinear el contenido de manera horizontal y vertical */
-    display: flex;
-    /* Centra horizontalmente el contenido dentro del body */
-    justify-content: center;
-    /* Alinea los elementos al inicio en el eje vertical */
-    align-items: flex-start;
-    /* Define el color de fondo */
-    background-color: #f8f9fa;
-    /* Añade un espaciado superior */
-    padding-top: 10px;
-}
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+:root{color-scheme:light;--bg:#f7f9fc;--surface:#fff;--navy:#10243a;--ink:#17293c;--muted:#607187;--line:#e3e9f1;--blue:#2563eb;--soft:#edf4ff;--shadow:0 18px 50px rgba(24,46,77,.065)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:88px}body{margin:0;background:var(--bg);color:var(--ink);font-family:'DM Sans',system-ui,Arial,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}h1,h2,h3,.logo{font-family:'Manrope',system-ui,sans-serif;line-height:1.16;letter-spacing:-.04em}a{color:inherit;text-decoration:none}button,input,textarea{font:inherit}button{cursor:pointer}.container{width:min(1160px,calc(100% - 44px));margin-inline:auto}
+.header{position:sticky;top:0;z-index:25;background:rgba(255,255,255,.94);border-bottom:1px solid var(--line);backdrop-filter:blur(18px)}.nav{height:80px;display:flex;justify-content:space-between;align-items:center}.logo{font-size:29px;font-weight:800;letter-spacing:-.085em;color:var(--navy)}.logo span{color:var(--blue)}.nav-links{display:flex;align-items:center;gap:30px}.nav-links a{font-size:14px;font-weight:600;color:#43546a;transition:color .2s}.nav-links a:hover{color:var(--blue)}.nav-links .nav-contact{background:var(--navy);color:white;padding:11px 19px;border-radius:10px;box-shadow:0 8px 18px rgba(16,36,58,.13)}.nav-links .nav-contact:hover{color:white;background:var(--blue)}.menu-toggle{display:none}
+.hero{position:relative;min-height:645px;display:grid;grid-template-columns:1.1fr .9fr;gap:70px;align-items:center;padding-block:103px}.status,.eyebrow{font-size:11px;font-weight:800;letter-spacing:.13em;color:var(--blue)}.status{display:inline-block;border:1px solid #d8e6ff;background:#edf4ff;padding:9px 15px;border-radius:99px;line-height:1.5}.dot{display:none}.hero h1{color:var(--navy);font-size:clamp(43px,5vw,71px);font-weight:800;letter-spacing:-.065em;margin:28px 0 20px}.hero h1 span{color:var(--blue)}.hero-copy>p{font-size:18px;max-width:580px;color:var(--muted)}.actions{display:flex;gap:12px;margin-top:31px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:11px;padding:13px 23px;font-weight:700;font-size:14px;border:1px solid #cdd7e5;transition:background .2s,transform .2s,box-shadow .2s}.btn:hover{transform:translateY(-2px)}.primary{background:var(--navy);color:white;border-color:var(--navy);box-shadow:0 10px 25px rgba(16,36,58,.16)}.primary:hover{background:var(--blue);border-color:var(--blue)}.secondary{background:white;color:var(--navy)}.secondary:hover{background:var(--soft);border-color:#a8c6ff}.hero-meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:38px;font-size:12px;color:#546981}.hero-meta span{background:white;border:1px solid var(--line);padding:7px 12px;border-radius:8px}
+.hero-art{min-height:400px;position:relative;display:grid;place-items:center}.orb{position:absolute;width:340px;height:340px;background:radial-gradient(circle,#b9d3ff 0%,#e7f0ff 52%,transparent 73%);filter:blur(16px);border-radius:50%}.code-card{position:relative;width:min(100%,430px);background:var(--navy);border:1px solid #29445e;border-radius:18px;box-shadow:0 38px 75px rgba(16,36,58,.20);overflow:hidden;transform:rotate(-2deg);transition:transform .3s}.code-card:hover{transform:rotate(0deg) translateY(-3px)}.window-dots{background:#19334d;color:#f0a9a8;padding:13px 20px;letter-spacing:5px}.code-card pre{color:#e6eef8;font-size:14px;line-height:2;padding:20px 23px;overflow:auto}.code-card pre span{color:#bcb3ff}.code-card pre em{color:#70ded1;font-style:normal}.code-card pre b{color:#ffcc94}.code-footer{padding:15px 23px;border-top:1px solid #34506a;color:#aac1d6;font-size:12px}
+.section{padding-block:106px}.muted{background:#f0f4f9;border-block:1px solid #eaf0f6}.section h2{font-size:clamp(32px,3.8vw,47px);letter-spacing:-.05em;color:var(--navy);margin:15px 0 19px}.section-intro,.about p,.section-heading p,.contact p{color:var(--muted)}.about{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start}.about p{font-size:16px}.text-link{color:var(--blue);font-weight:800}.text-link:hover{text-decoration:underline}.skills{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}.skills>div{background:white;border:1px solid var(--line);padding:27px 25px;border-radius:16px;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s}.skills>div:hover{transform:translateY(-5px);box-shadow:0 24px 50px rgba(24,46,77,.11)}.skills span{font-weight:800;color:var(--blue);font-size:12px}.skills h3{font-size:20px;margin:23px 0 11px;color:var(--navy)}.skills p{color:var(--muted);font-size:14px;margin:0}
+.section-heading{display:flex;justify-content:space-between;gap:24px;align-items:end}.filters{display:flex;gap:8px;flex-wrap:wrap}.filters button{border:1px solid #d6dfeb;background:white;color:#50627a;border-radius:10px;padding:9px 17px;font-weight:700;font-size:13px;transition:all .2s}.filters button.active,.filters button:hover{background:var(--navy);border-color:var(--navy);color:white}.projects{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:25px;margin-top:40px}.project{background:white;border:1px solid #e1e8f0;border-radius:17px;overflow:hidden;box-shadow:var(--shadow);transition:transform .25s,box-shadow .25s}.project:hover{transform:translateY(-7px);box-shadow:0 26px 55px rgba(22,45,75,.12)}.project[hidden],[hidden]{display:none!important}.project-cover{height:215px;background:#e7eef7;overflow:hidden;border-bottom:1px solid var(--line)}.project-cover img{display:block;width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .5s}.project:hover .project-cover img{transform:scale(1.04)}.project-body{padding:25px;display:flex;flex-direction:column;min-height:267px}.project-body h3{font-size:20px;margin:12px 0;color:var(--navy);letter-spacing:-.035em}.project-body p{color:var(--muted);font-size:14px;margin:0 0 22px}.project-button{border:0;background:none;color:var(--blue);font-size:14px;font-weight:800;text-align:left;padding:8px 0;margin-top:auto}.project-button:hover{text-decoration:underline}
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:95px}.social{display:flex;flex-wrap:wrap;gap:18px;margin-top:32px}.social a{color:var(--blue);font-size:14px;font-weight:700}.social a:hover{text-decoration:underline}.contact form{display:flex;flex-direction:column;gap:10px;background:white;border:1px solid var(--line);border-radius:19px;padding:30px;box-shadow:var(--shadow)}.contact label{font-weight:700;font-size:14px;color:var(--navy)}.contact input,.contact textarea{border:1px solid #d4deea;background:#fbfcff;color:var(--ink);border-radius:10px;padding:12px 15px;margin-bottom:10px;outline:none;transition:border-color .2s,box-shadow .2s}.contact input:focus,.contact textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px #2563eb1c}.contact form .btn{align-self:flex-start}.contact small{font-size:12px;color:var(--muted)}
+.footer{padding:30px 0;background:var(--navy);color:#d0dfed;font-size:13px}.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:22px}.footer a:hover{text-decoration:underline}
+dialog{background:white;color:var(--ink);width:min(940px,95vw);max-height:94vh;border:1px solid var(--line);border-radius:17px;padding:23px;box-shadow:0 40px 90px #091c3377}dialog::backdrop{background:#0d2039b8;backdrop-filter:blur(5px)}.gallery-head{display:flex;align-items:center;justify-content:space-between;gap:15px}.gallery-head h3{font-size:18px;color:var(--navy);margin:0 0 20px}.gallery-head button,.gallery-image button{border:1px solid #dbe4ef;border-radius:9px;background:#f1f5fa;color:var(--navy);padding:9px 12px}.gallery-image{display:flex;align-items:center;justify-content:space-between;gap:9px}.gallery-image img{width:min(calc(100% - 100px),760px);max-height:65vh;object-fit:contain}#gallery-count{text-align:center;font-size:13px;color:var(--muted)}
+.wa-floating{position:fixed;right:20px;bottom:20px;z-index:30;background:#15803d;color:white;border-radius:99px;padding:13px 18px;box-shadow:0 13px 27px rgba(14,109,51,.22);font-size:14px;font-weight:800;transition:transform .2s}.wa-floating:hover{transform:translateY(-4px)}a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #5c91ff;outline-offset:3px}
+@media(max-width:960px){.hero{gap:28px}.about,.contact{gap:45px}.skills{grid-template-columns:repeat(2,1fr)}.projects{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.nav{height:72px}.menu-toggle{display:block;border:1px solid #e0e7f0;border-radius:9px;background:white;color:var(--navy);font-size:24px;padding:3px 12px}.nav-links{display:none;position:absolute;top:72px;left:0;right:0;background:white;flex-direction:column;align-items:stretch;padding:20px 25px;box-shadow:0 20px 35px #1a385d18;gap:18px}.nav-links.open{display:flex}.hero{grid-template-columns:1fr;gap:10px;min-height:auto;padding-block:65px}.hero h1{letter-spacing:-.055em}.hero-copy>p{font-size:16px}.hero-art{min-height:300px}.code-card{max-width:430px}.section{padding-block:75px}.about,.contact{grid-template-columns:1fr}.section-heading{flex-direction:column;align-items:flex-start}.projects{grid-template-columns:1fr}.skills{grid-template-columns:1fr 1fr}.project-body{min-height:0}.footer-inner{flex-direction:column;align-items:flex-start}.gallery-image img{width:calc(100% - 82px)}.gallery-image button{padding:7px}.wa-floating{right:12px;bottom:12px;padding:11px 14px;font-size:12px}}
+@media(max-width:450px){.container{width:calc(100% - 32px)}.status{font-size:10px}.hero h1{font-size:clamp(36px,10vw,46px)}.skills{grid-template-columns:1fr}.code-card pre{font-size:12px}.contact form{padding:20px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 
-.custom-card {
-    /* Da bordes redondeados a las tarjetas */
-    border-radius: 20px;
-    /* Establece el ancho al 100% del contenedor */
-    width: 100%;
-    /* Define un ancho máximo para las tarjetas */
-    max-width: 1000px;
-    /* Establece una altura mínima */
-    min-height: 500px;
-    /* Añade una sombra alrededor de las tarjetas */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /* Fondo blanco para las tarjetas */
-    background-color: white;
-    /* Añade relleno interno a las tarjetas */
-    padding: 30px;
-    /* Añade un margen alrededor de las tarjetas */
-    margin: 20px;
-    /* Añade un margen inferior extra */
-    margin-bottom: 40px;
-}
+/* Contacto Formspree + WhatsApp */
+.contact-choice-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:5px}
+.contact-choice-actions .btn{flex:1 1 180px;white-space:normal;text-align:center;min-height:48px}
+.contact-choice-actions .btn:disabled{opacity:.65;cursor:wait;transform:none}
+.contact-choice-actions .primary{background:#2563eb;border-color:#2563eb;color:#fff}
+.contact-choice-actions .primary:hover{background:#1d4ed8;border-color:#1d4ed8}
+.contact-choice-actions .whatsapp-btn{background:#16a34a;border-color:#16a34a;color:#fff;box-shadow:0 8px 20px rgba(22,163,74,.15)}
+.contact-choice-actions .whatsapp-btn:hover{background:#15803d;border-color:#15803d}
+.contact-form-status{font-size:14px;margin:4px 0!important;min-height:0;line-height:1.5}
+.contact-form-status:empty{display:none}
+.contact-form-status.success{color:#166534}.contact-form-status.error{color:#b91c1c}.contact-form-status.info{color:#1d4ed8}
+@media(max-width:480px){.contact-choice-actions{flex-direction:column;align-items:stretch}.contact-choice-actions .btn{flex:none;width:100%}}
 
-.custom-card h5 {
-    /* Tamaño de la fuente para los encabezados dentro de las tarjetas */
-    font-size: 1.8rem;
-    /* Espaciado inferior para los encabezados */
-    margin-bottom: 20px;
-}
+/* Ajustes finales para contacto */
+.contact-choice-actions{align-items:stretch}
+.contact-choice-actions .btn{display:inline-flex;align-items:center;justify-content:center;line-height:1.3;min-height:54px;white-space:nowrap;padding:12px 13px}
+.contact-choice-actions .whatsapp-btn{background:#16a34a;color:white;border-color:#16a34a}
+.contact-choice-actions .whatsapp-btn:hover{background:#15803d;border-color:#15803d}
+.contact-form-status[hidden]{display:none!important}
+.contact-swal-popup{border-radius:18px!important;font-family:'DM Sans',system-ui,sans-serif!important}
+@media(max-width:540px){.contact-choice-actions{flex-direction:column}.contact-choice-actions .btn{width:100%;flex:auto}}
 
-.custom-card p {
-    /* Tamaño de la fuente para los párrafos dentro de las tarjetas */
-    font-size: 0.95rem;
-    /* Justifica el texto */
-    text-align: justify;
-    /* Espaciado inferior para los párrafos */
-    margin-bottom: 20px;
-}
-
-/* Medias queries para dispositivos con un ancho mínimo de 768px */
-@media (min-width: 768px) {
-    .custom-card h5 {
-        /* Aumenta el tamaño de la fuente para pantallas más grandes */
-        font-size: 2.2rem;
-    }
-
-    .custom-card p {
-        /* Aumenta el tamaño de la fuente para párrafos en pantallas más grandes */
-        font-size: 1.1rem;
-    }
-}
-
-.navbar-custom {
-    /* Da bordes redondeados a la barra de navegación en la parte superior */
-    border-radius: 20px 20px 0 0;
-    /* Ajusta el margen de la barra de navegación para que sobresalga de la tarjeta */
-    margin: -30px -30px 20px -30px;
-    /* Define el relleno de la barra de navegación */
-    padding: 10px 20px;
-    /* Establece el texto en negrita */
-    font-weight: bold;
-}
-
-.navbar-nav .nav-link {
-    /* Color de los enlaces en la barra de navegación */
-    color: white;
-    /* Transición suave del color al hacer hover */
-    transition: color 0.3s;
-}
-
-.navbar-nav .nav-link:hover {
-    /* Cambia el color de los enlaces al pasar el cursor */
-    color: #ffd700;
-}
-
-.d-flex {
-    /* Utiliza Flexbox para la alineación horizontal */
-    display: flex;
-    /* Permite el desplazamiento horizontal */
-    overflow-x: auto;
-    /* Añade relleno superior e inferior */
-    padding: 10px 0;
-    /* Desplazamiento suave al hacer scroll */
-    scroll-behavior: smooth;
-}
-
-.d-flex.overflow-auto.flex-nowrap::-webkit-scrollbar {
-    /* Altura de la barra de desplazamiento */
-    height: 8px;
-}
-
-.d-flex.overflow-auto.flex-nowrap::-webkit-scrollbar-thumb {
-    /* Color del "pulgar" de la barra de desplazamiento */
-    background: #888;
-    /* Esquinas redondeadas para el "pulgar" */
-    border-radius: 10px;
-}
-
-.d-flex.overflow-auto.flex-nowrap::-webkit-scrollbar-track {
-    /* Color de la pista de la barra de desplazamiento */
-    background-color: #f1f1f1;
-    /* Esquinas redondeadas para la pista */
-    border-radius: 10px;
-}
-
-.d-flex.overflow-auto.flex-nowrap::-webkit-scrollbar-thumb:hover {
-    /* Color del "pulgar" cuando se pasa el cursor por encima */
-    background-color: #555;
-}
-
-.hover-effect {
-	transition: background-color 0.3s, transform 0.3s; /* Transición suave */
-}
-.hover-effect:hover {
-	background-color: #0056b3; /* Cambia el color de fondo al pasar el mouse */
-	transform: scale(1.05); /* Aumenta un poco el tamaño del botón */
-}
-
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    background-color: rgba(255, 255, 255, 0.5); /* Color de fondo */
-    border-radius: 50%; /* Bordes redondeados */
-}
-
-.carousel-control-prev-icon {
-    background-image: none; /* Remover la imagen por defecto */
-}
-
-.carousel-control-next-icon {
-    background-image: none; /* Remover la imagen por defecto */
-}
-
-/* Cambiar el color de las flechas a #6c757d */
-.carousel-control-prev-icon::after {
-    content: '\25C0'; /* Código Unicode para la flecha hacia la izquierda */
-    font-size: 24px;  /* Tamaño de la flecha */
-    color: #6c757d;   /* Color de la flecha */
-}
-
-.carousel-control-next-icon::after {
-    content: '\25B6';  /* Usar un símbolo como flecha */
-    font-size: 24px; /* Tamaño de la flecha */
-    color: #6c757d; /* Color de la flecha */
-}
-
-input[readonly], textarea[readonly] {
-    background-color: #f0f0f0; /* Color de fondo opaco */
-    color: #777; /* Color de texto más claro para indicar solo lectura */
-    cursor: not-allowed; /* Cambia el cursor a "no permitido" */
-}
-
+.project-technologies{font-size:12px!important;color:#2563eb!important;font-weight:700;margin-top:-8px!important}
+.projects-error{color:#b91c1c}
