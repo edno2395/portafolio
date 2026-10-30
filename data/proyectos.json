@@ -104,8 +104,8 @@
   },
   {
     "id": "proyecto-1793376966311",
-    "title": "Sistema de Gestión de Asientos Contables",
-    "description": "Sistema desarrollado en Python para automatizar procesos contables mensuales, realizar cruces y controles, generar reportes personalizados y respaldar información, con seguimiento e historial por período.",
+    "title": "Automatizacion Gestión de Asientos Contables",
+    "description": "Se desarrollo en Python para automatizar procesos contables mensuales, realizar cruces y controles, generar reportes personalizados y respaldar información, con seguimiento e historial por período.",
     "category": "sistemas",
     "technologies": "Python-Reportes-Excel-PDF/DOCX",
     "images": [
@@ -115,14 +115,14 @@
       "assets/proyectos/captura-1793376816281-eokah.webp",
       "assets/proyectos/captura-1793376840822-dsnkp.webp",
       "assets/proyectos/captura-1793376847831-b87bk.webp",
-      "assets/proyectos/captura-1793376854609-4awib.webp",
-      "assets/proyectos/captura-1793376861367-e9el3.webp",
-      "assets/proyectos/captura-1793376875247-patk0.webp",
       "assets/proyectos/captura-1793376881889-magij.webp",
       "assets/proyectos/captura-1793376891603-hyhmt.webp",
       "assets/proyectos/captura-1793376899241-1243n.webp",
       "assets/proyectos/captura-1793376908667-p53nm.webp",
-      "assets/proyectos/captura-1793376916280-02e2t.webp"
+      "assets/proyectos/captura-1793376916280-02e2t.webp",
+      "assets/proyectos/captura-1793377659773-iibi9.png",
+      "assets/proyectos/captura-1793377674823-yxtbv.png",
+      "assets/proyectos/captura-1793377681843-3clkc.png"
     ],
     "featured": true
   }
