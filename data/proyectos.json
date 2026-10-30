@@ -1,5 +1,76 @@
 [
   {
+    "id": "proyecto-1793376966311",
+    "title": "Automatizacion Gestión de Asientos Contables",
+    "description": "Se desarrollo en Python para automatizar procesos contables mensuales, realizar cruces y controles, generar reportes personalizados y respaldar información, con seguimiento e historial por período.",
+    "category": "sistemas",
+    "technologies": "Python-Reportes-Excel-PDF/DOCX",
+    "images": [
+      "assets/proyectos/captura-1793376781512-k63q5.webp",
+      "assets/proyectos/captura-1793376789918-lolbq.webp",
+      "assets/proyectos/captura-1793376809763-vv3ui.webp",
+      "assets/proyectos/captura-1793376816281-eokah.webp",
+      "assets/proyectos/captura-1793376840822-dsnkp.webp",
+      "assets/proyectos/captura-1793376847831-b87bk.webp",
+      "assets/proyectos/captura-1793376881889-magij.webp",
+      "assets/proyectos/captura-1793376891603-hyhmt.webp",
+      "assets/proyectos/captura-1793376899241-1243n.webp",
+      "assets/proyectos/captura-1793376908667-p53nm.webp",
+      "assets/proyectos/captura-1793376916280-02e2t.webp",
+      "assets/proyectos/captura-1793377659773-iibi9.png",
+      "assets/proyectos/captura-1793377674823-yxtbv.png",
+      "assets/proyectos/captura-1793377681843-3clkc.png"
+    ],
+    "featured": true
+  },
+  {
+    "id": "proyecto-1793378159768",
+    "title": "Sistema de Carga Masiva de Datos a Oracle – SQL*Loader",
+    "description": "Aplicación desarrollada en Python para automatizar la carga masiva de archivos CSV, TXT y TSV a Oracle mediante SQL*Loader, con validación de estructuras, generación de archivos CTL, creación automática de tablas y monitoreo del procesamiento en tiempo real.",
+    "category": "sistemas",
+    "technologies": "Python-Oracle Database-SQL*Loader-CTL-CSV / TXT / TSV",
+    "images": [
+      "assets/proyectos/captura-1793378138195-iwd5x.webp"
+    ],
+    "featured": true
+  },
+  {
+    "id": "proyecto-1793381847525",
+    "title": "Extracción Masiva de Archivos SFTP",
+    "description": "Automatización desarrollada en PowerShell y WinSCP para localizar y descargar archivos masivamente desde servidores SFTP, mediante procesamiento por lotes, reconexión automática, seguimiento del progreso y registro de archivos no encontrados.",
+    "category": "automatizacion",
+    "technologies": "PowerShell-WinSCP-SFTP-Automatización",
+    "images": [
+      "assets/proyectos/captura-1793381840571-2sk7x.png"
+    ],
+    "featured": true
+  },
+  {
+    "id": "proyecto-5",
+    "title": "Sistema Escalafón (UGEL Sullana)",
+    "description": "Desarrollado en PHP, HTML, JavaScript, Bootstrap, jQuery y MySQL, con seguridad en accesos en usuarios.",
+    "category": "sistemas",
+    "technologies": "PHP Puro-HTML-Javascript-Mysql",
+    "images": [
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195418/imagen1_s7aptp.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195417/imagen2_pw1dfg.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195416/imagen3_itecgg.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195414/imagen4_tuqucq.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195414/imagen5_ufrl6b.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195414/imagen6_ieeah9.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195413/imagen7_do3d04.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195409/imagen8_fexcci.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195410/imagen9_r9d10k.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195409/imagen10_mmjkgz.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195409/imagen11_jrjwuv.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195409/imagen12_c4mtow.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195409/imagen13_je902f.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195409/imagen14_u1x7hh.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195409/imagen15_uxcmf5.webp"
+    ],
+    "featured": true
+  },
+  {
     "id": "proyecto-1",
     "title": "Sistema de Gestión de Ventas Restaurante",
     "description": "Sistema integral que gestiona caja, stock, clientes, proveedores, ventas, mesas, delivery y boletas electrónicas (SUNAT).",
@@ -40,25 +111,6 @@
     "featured": true
   },
   {
-    "id": "proyecto-3",
-    "title": "Landing Page",
-    "description": "Landing page realizada en HTML y CSS, dedicada a ofrecer baterías de calidad, asesoría y promociones para todos tus dispositivos.",
-    "category": "web",
-    "technologies": "HTML",
-    "images": [
-      "https://res.cloudinary.com/dirukaz36/image/upload/v1728181285/imagen1_n2hs4v.webp",
-      "https://res.cloudinary.com/dirukaz36/image/upload/v1728181285/imagen2_s8b2u6.webp",
-      "https://res.cloudinary.com/dirukaz36/image/upload/v1728181285/imagen3_n1kzga.webp",
-      "https://res.cloudinary.com/dirukaz36/image/upload/v1728181285/imagen4_ckrhyn.webp",
-      "https://res.cloudinary.com/dirukaz36/image/upload/v1728181285/imagen5_kyjknp.webp",
-      "https://res.cloudinary.com/dirukaz36/image/upload/v1728181432/imagen6_yhuhl1.webp",
-      "https://res.cloudinary.com/dirukaz36/image/upload/v1728181432/imagen7_ngcsgd.webp",
-      "https://res.cloudinary.com/dirukaz36/image/upload/v1728181432/imagen8_vrzgoh.webp",
-      "https://res.cloudinary.com/dirukaz36/image/upload/v1728181431/imagen9_hqndme.webp"
-    ],
-    "featured": true
-  },
-  {
     "id": "proyecto-4",
     "title": "Sistema para centro de salud",
     "description": "Pequeño sistema de ingresos de datos para un centro de salud, creado con HTML, CSS, PHP y AJAX, que garantiza alta seguridad en accesos.",
@@ -78,62 +130,21 @@
     "featured": true
   },
   {
-    "id": "proyecto-5",
-    "title": "Sistema Escalafón (UGEL Sullana)",
-    "description": "Desarrollado en PHP, HTML, JavaScript, Bootstrap, jQuery y MySQL, con seguridad en accesos en usuarios.",
-    "category": "sistemas",
-    "technologies": "PHP Puro-HTML-Javascript-Mysql",
+    "id": "proyecto-3",
+    "title": "Landing Page",
+    "description": "Landing page realizada en HTML y CSS, dedicada a ofrecer baterías de calidad, asesoría y promociones para todos tus dispositivos.",
+    "category": "web",
+    "technologies": "HTML",
     "images": [
-      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195418/imagen1_s7aptp.webp",
-      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195417/imagen2_pw1dfg.webp",
-      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195416/imagen3_itecgg.webp",
-      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195414/imagen4_tuqucq.webp",
-      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195414/imagen5_ufrl6b.webp",
-      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195414/imagen6_ieeah9.webp",
-      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195413/imagen7_do3d04.webp",
-      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195409/imagen8_fexcci.webp",
-      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195410/imagen9_r9d10k.webp",
-      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195409/imagen10_mmjkgz.webp",
-      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195409/imagen11_jrjwuv.webp",
-      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195409/imagen12_c4mtow.webp",
-      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195409/imagen13_je902f.webp",
-      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195409/imagen14_u1x7hh.webp",
-      "https://res.cloudinary.com/dirukaz36/image/upload/v1728195409/imagen15_uxcmf5.webp"
-    ],
-    "featured": true
-  },
-  {
-    "id": "proyecto-1793376966311",
-    "title": "Automatizacion Gestión de Asientos Contables",
-    "description": "Se desarrollo en Python para automatizar procesos contables mensuales, realizar cruces y controles, generar reportes personalizados y respaldar información, con seguimiento e historial por período.",
-    "category": "sistemas",
-    "technologies": "Python-Reportes-Excel-PDF/DOCX",
-    "images": [
-      "assets/proyectos/captura-1793376781512-k63q5.webp",
-      "assets/proyectos/captura-1793376789918-lolbq.webp",
-      "assets/proyectos/captura-1793376809763-vv3ui.webp",
-      "assets/proyectos/captura-1793376816281-eokah.webp",
-      "assets/proyectos/captura-1793376840822-dsnkp.webp",
-      "assets/proyectos/captura-1793376847831-b87bk.webp",
-      "assets/proyectos/captura-1793376881889-magij.webp",
-      "assets/proyectos/captura-1793376891603-hyhmt.webp",
-      "assets/proyectos/captura-1793376899241-1243n.webp",
-      "assets/proyectos/captura-1793376908667-p53nm.webp",
-      "assets/proyectos/captura-1793376916280-02e2t.webp",
-      "assets/proyectos/captura-1793377659773-iibi9.png",
-      "assets/proyectos/captura-1793377674823-yxtbv.png",
-      "assets/proyectos/captura-1793377681843-3clkc.png"
-    ],
-    "featured": true
-  },
-  {
-    "id": "proyecto-1793378159768",
-    "title": "Sistema de Carga Masiva de Datos a Oracle – SQL*Loader",
-    "description": "Aplicación desarrollada en Python para automatizar la carga masiva de archivos CSV, TXT y TSV a Oracle mediante SQL*Loader, con validación de estructuras, generación de archivos CTL, creación automática de tablas y monitoreo del procesamiento en tiempo real.",
-    "category": "sistemas",
-    "technologies": "Python-Oracle Database-SQL*Loader-CTL-CSV / TXT / TSV",
-    "images": [
-      "assets/proyectos/captura-1793378138195-iwd5x.webp"
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728181285/imagen1_n2hs4v.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728181285/imagen2_s8b2u6.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728181285/imagen3_n1kzga.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728181285/imagen4_ckrhyn.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728181285/imagen5_kyjknp.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728181432/imagen6_yhuhl1.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728181432/imagen7_ngcsgd.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728181432/imagen8_vrzgoh.webp",
+      "https://res.cloudinary.com/dirukaz36/image/upload/v1728181431/imagen9_hqndme.webp"
     ],
     "featured": true
   }
