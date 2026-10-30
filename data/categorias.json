@@ -14,9 +14,5 @@
   {
     "id": "scripts",
     "name": "Scripts / PowerShell"
-  },
-  {
-    "id": "datos",
-    "name": "Bases de datos"
   }
 ]
