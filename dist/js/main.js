@@ -117,7 +117,7 @@ function drawProjects(){
     upper.append(element('span','project-category',configuredCategoryName(categoryKey(p))));
     upper.append(element('span','project-number',String(i+1).padStart(2,'0')));
     body.append(upper,element('h3','',p.title),element('p','project-description',p.description||''));
-    const techs=Array.isArray(p.technologies)?p.technologies:(p.technologies||'').split(/[·,|]/);
+    const techs=Array.isArray(p.technologies)?p.technologies:(p.technologies||'').split(/[·,|]|\s+-\s+|(?<=[a-z])-(?=[A-Z])/);
     const tags=techs.map(t=>String(t).trim()).filter(Boolean).slice(0,4);
     if(tags.length){const strip=element('div','project-tags');tags.forEach(t=>strip.append(element('span','project-tag',t)));body.append(strip);}
     const button=element('button','project-button','Ver proyecto ↗');button.type='button';
@@ -148,12 +148,14 @@ document.getElementById('gallery-next').addEventListener('click',()=>{
 });
 async function loadProjects(){
  try{
-  const response=await fetch('./data/proyectos.json',{cache:'no-cache'});
+  const response=await fetch('./data/proyectos.json?actualizacion='+Date.now(),{cache:'no-store'});
   if(!response.ok)throw new Error('HTTP '+response.status);
   const data=await response.json();if(!Array.isArray(data))throw new Error('Formato inválido');
+  // Respetamos exactamente el orden del archivo publicado por el administrador.
   projects=data.filter(p=>p&&p.featured!==false);
+  console.info('Portafolio: se cargaron',projects.length,'proyectos en el orden del JSON.');
   try {
-    const categoryResponse=await fetch('./data/categorias.json',{cache:'no-store'});
+    const categoryResponse=await fetch('./data/categorias.json?actualizacion='+Date.now(),{cache:'no-store'});
     if(categoryResponse.ok){const list=await categoryResponse.json();if(Array.isArray(list))managedCategories=list;}
   }catch(err){console.info('Sin catálogo de categorías; se usarán las existentes en los proyectos.',err);}
   buildCategoryFilters();
