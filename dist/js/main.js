@@ -11,39 +11,100 @@ document.getElementById('year').textContent = new Date().getFullYear();
 const menu=document.querySelector('.menu-toggle'), links=document.querySelector('.nav-links');
 menu.addEventListener('click',()=>{const open=links.classList.toggle('open');menu.setAttribute('aria-expanded',String(open));});
 links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{links.classList.remove('open');menu.setAttribute('aria-expanded','false');}));
-function applyFilter(){
- const active=document.querySelector('[data-filter].active')?.dataset.filter||'todos';
- document.querySelectorAll('.project').forEach(card=>{card.hidden=active!=='todos'&&card.dataset.category!==active;});
+// Catálogo en carrusel: conserva los datos publicados por el administrador.
+const searchInput = document.getElementById('project-search');
+const projectsCounter = document.getElementById('projects-counter');
+const prevProjectsButton = document.getElementById('projects-prev');
+const nextProjectsButton = document.getElementById('projects-next');
+const projectsPosition = document.getElementById('projects-position');
+let carouselFrame = 0;
+function element(tag, className, content){
+  const el=document.createElement(tag);
+  if(className) el.className=className;
+  if(content!==undefined) el.textContent=content;
+  return el;
+}
+function filteredProjects(){
+  const category=document.querySelector('[data-filter].active')?.dataset.filter||'todos';
+  const query=(searchInput.value||'').toLocaleLowerCase('es').trim();
+  return projects.map((p,i)=>({p,i})).filter(({p})=>{
+    const matchesCategory=category==='todos'||p.category===category;
+    const text=[p.title,p.description,Array.isArray(p.technologies)?p.technologies.join(' '):p.technologies].filter(Boolean).join(' ').toLocaleLowerCase('es');
+    return matchesCategory && (!query||text.includes(query));
+  });
+}
+function updateCarouselControls(){
+  const total = projectsContainer.querySelectorAll('.project').length;
+  if(!total){
+    prevProjectsButton.disabled=true;nextProjectsButton.disabled=true;
+    projectsPosition.textContent='Sin proyectos para mostrar';return;
+  }
+  const maximum=Math.max(0,projectsContainer.scrollWidth-projectsContainer.clientWidth);
+  const left=projectsContainer.scrollLeft;
+  prevProjectsButton.disabled=left<=2;
+  nextProjectsButton.disabled=left>=maximum-2;
+  const cards=[...projectsContainer.querySelectorAll('.project')];
+  const gap=parseFloat(getComputedStyle(projectsContainer).columnGap)||22;
+  const first=Math.min(total-1,Math.max(0,Math.round(left/(cards[0].getBoundingClientRect().width+gap))));
+  const countVisible=Math.max(1,Math.round(projectsContainer.clientWidth/(cards[0].getBoundingClientRect().width+22)));
+  const from=Math.max(1,first+1);
+  projectsPosition.textContent=`${from}–${Math.min(total,from+countVisible-1)} de ${total}`;
+}
+function moveCarousel(direction){
+  const card=projectsContainer.querySelector('.project');
+  if(!card)return;
+  const gap=parseFloat(getComputedStyle(projectsContainer).columnGap)||22;
+  const step=card.getBoundingClientRect().width+gap;
+  projectsContainer.scrollBy({left:direction*step,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
+}
+prevProjectsButton.addEventListener('click',()=>moveCarousel(-1));
+nextProjectsButton.addEventListener('click',()=>moveCarousel(1));
+projectsContainer.addEventListener('scroll',()=>{
+  if(carouselFrame)cancelAnimationFrame(carouselFrame);
+  carouselFrame=requestAnimationFrame(updateCarouselControls);
+},{passive:true});
+window.addEventListener('resize',updateCarouselControls);
+projectsContainer.addEventListener('keydown',event=>{
+  if(event.target!==projectsContainer)return;
+  if(event.key==='ArrowRight'||event.key==='ArrowLeft'){
+    event.preventDefault();moveCarousel(event.key==='ArrowRight'?1:-1);
+  }
+});
+function drawProjects(){
+  const matches=filteredProjects();
+  projectsContainer.replaceChildren();
+  projectsCounter.textContent=matches.length===1?'1 proyecto':`${matches.length} proyectos`;
+  matches.forEach(({p,i})=>{
+    const article=element('article','project');article.dataset.category=p.category||'sistemas';
+    const cover=element('div','project-cover');
+    const pic=element('img');pic.src=p.images?.[0]||'';pic.alt='Vista previa de '+p.title;
+    pic.loading='lazy';pic.decoding='async';
+    cover.append(pic);
+    const counter=element('span','project-image-count',`${p.images?.length||0} capturas`);
+    if(p.images?.length)cover.append(counter);
+    const body=element('div','project-body');
+    const upper=element('div','project-meta');
+    upper.append(element('span','project-category',p.category==='web'?'Desarrollo web':'Software / Sistemas'));
+    upper.append(element('span','project-number',String(i+1).padStart(2,'0')));
+    body.append(upper,element('h3','',p.title),element('p','project-description',p.description||''));
+    const techs=Array.isArray(p.technologies)?p.technologies:(p.technologies||'').split(/[·,|]/);
+    const tags=techs.map(t=>String(t).trim()).filter(Boolean).slice(0,4);
+    if(tags.length){const strip=element('div','project-tags');tags.forEach(t=>strip.append(element('span','project-tag',t)));body.append(strip);}
+    const button=element('button','project-button','Ver proyecto ↗');button.type='button';
+    button.setAttribute('aria-label','Ver galería de '+p.title);
+    button.addEventListener('click',()=>{current=i;index=0;renderGallery();if(typeof dlg.showModal==='function')dlg.showModal();else dlg.setAttribute('open','');});
+    body.append(button);article.append(cover,body);projectsContainer.append(article);
+  });
+  if(!matches.length) projectsContainer.append(element('p','projects-empty','No encontramos proyectos con esos filtros. Prueba otra búsqueda.'));
+  projectsContainer.scrollLeft=0;
+  requestAnimationFrame(updateCarouselControls);
 }
 document.querySelectorAll('[data-filter]').forEach(btn=>btn.addEventListener('click',()=>{
- document.querySelectorAll('[data-filter]').forEach(b=>b.classList.toggle('active',b===btn));applyFilter();
+  document.querySelectorAll('[data-filter]').forEach(b=>b.classList.toggle('active',b===btn));
+  drawProjects();
 }));
-function element(tag, className, content){
- const el=document.createElement(tag);if(className)el.className=className;
- if(content!==undefined)el.textContent=content;return el;
-}
-function drawProjects(){
- projectsContainer.replaceChildren();
- projects.forEach((p,i)=>{
-  const article=element('article','project');article.dataset.category=p.category||'sistemas';
-  const cover=element('div','project-cover');const pic=element('img');
-  pic.src=p.images?.[0]||'';pic.alt='Vista previa de '+p.title;pic.loading='lazy';pic.decoding='async';
-  cover.append(pic);
-  const body=element('div','project-body');
-  body.append(element('span','eyebrow','PROYECTO '+String(i+1).padStart(2,'0')));
-  body.append(element('h3','',p.title));
-  body.append(element('p','',p.description||''));
-  if(p.technologies)body.append(element('p','project-technologies',p.technologies));
-  const button=element('button','project-button','Explorar proyecto ↗');button.type='button';
-  button.addEventListener('click',()=>{
-   current=i;index=0;renderGallery();
-   if(typeof dlg.showModal==='function')dlg.showModal();else dlg.setAttribute('open','');
-  });
-  body.append(button);article.append(cover,body);projectsContainer.append(article);
- });
- if(!projects.length)projectsContainer.append(element('p','','Todavía no hay proyectos publicados.'));
- applyFilter();
-}
+searchInput.addEventListener('input',drawProjects);
+
 function renderGallery(){
  const p=projects[current];if(!p)return;
  const images=Array.isArray(p.images)&&p.images.length?p.images:[''];
