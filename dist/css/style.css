@@ -94,3 +94,8 @@ dialog{background:white;color:var(--ink);width:min(940px,95vw);max-height:94vh;b
 @media(max-width:960px){.projects-carousel .project{flex-basis:calc((100% - 22px)/2)}}
 @media(max-width:700px){.projects-carousel .project{flex-basis:100%}}
 @media(prefers-reduced-motion:reduce){.projects.projects-carousel{scroll-behavior:auto}}
+
+/* Filtros dinámicos: permiten más categorías sin desordenar la sección */
+.filters{max-width:100%;flex-wrap:wrap;justify-content:flex-end;align-content:center;}
+.filters button{white-space:nowrap}
+@media(max-width:700px){.filters{justify-content:flex-start;}}
