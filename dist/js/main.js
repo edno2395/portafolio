@@ -24,11 +24,41 @@ function element(tag, className, content){
   if(content!==undefined) el.textContent=content;
   return el;
 }
+// Las categorías salen de data/proyectos.json, no de botones fijos.
+const CATEGORY_LABELS = {
+  sistemas: 'Sistemas', web: 'Web', automatizacion: 'Automatización',
+  scripts: 'Scripts', datos: 'Datos', escritorio: 'Escritorio',
+  ia: 'IA', otros: 'Otros'
+};
+function categoryKey(p) {
+  const raw = String(p.category || 'sistemas').trim().toLocaleLowerCase('es');
+  return raw.normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'') || 'otros';
+}
+function categoryLabel(key) {
+  return CATEGORY_LABELS[key] || key.split('-').map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(' ');
+}
+let selectedCategory = 'todos';
+let managedCategories = [];
+function configuredCategoryName(id){return managedCategories.find(c=>c.id===id)?.name || categoryLabel(id);}
+function buildCategoryFilters() {
+  const filters = document.getElementById('project-filters');
+  const categories = [...new Set(projects.map(categoryKey))].sort((a,b)=>configuredCategoryName(a).localeCompare(configuredCategoryName(b),'es'));
+  if (selectedCategory !== 'todos' && !categories.includes(selectedCategory)) selectedCategory='todos';
+  filters.replaceChildren();
+  for (const key of ['todos', ...categories]) {
+    const btn=element('button', key===selectedCategory?'active':'', key==='todos'?'Todos':configuredCategoryName(key));
+    btn.type='button';btn.dataset.filter=key;
+    btn.setAttribute('aria-pressed',String(key===selectedCategory));
+    btn.addEventListener('click',()=>{selectedCategory=key;buildCategoryFilters();drawProjects();});
+    filters.append(btn);
+  }
+}
 function filteredProjects(){
-  const category=document.querySelector('[data-filter].active')?.dataset.filter||'todos';
+  const category=selectedCategory;
   const query=(searchInput.value||'').toLocaleLowerCase('es').trim();
   return projects.map((p,i)=>({p,i})).filter(({p})=>{
-    const matchesCategory=category==='todos'||p.category===category;
+    const matchesCategory=category==='todos'||categoryKey(p)===category;
     const text=[p.title,p.description,Array.isArray(p.technologies)?p.technologies.join(' '):p.technologies].filter(Boolean).join(' ').toLocaleLowerCase('es');
     return matchesCategory && (!query||text.includes(query));
   });
@@ -84,7 +114,7 @@ function drawProjects(){
     if(p.images?.length)cover.append(counter);
     const body=element('div','project-body');
     const upper=element('div','project-meta');
-    upper.append(element('span','project-category',p.category==='web'?'Desarrollo web':'Software / Sistemas'));
+    upper.append(element('span','project-category',configuredCategoryName(categoryKey(p))));
     upper.append(element('span','project-number',String(i+1).padStart(2,'0')));
     body.append(upper,element('h3','',p.title),element('p','project-description',p.description||''));
     const techs=Array.isArray(p.technologies)?p.technologies:(p.technologies||'').split(/[·,|]/);
@@ -99,10 +129,7 @@ function drawProjects(){
   projectsContainer.scrollLeft=0;
   requestAnimationFrame(updateCarouselControls);
 }
-document.querySelectorAll('[data-filter]').forEach(btn=>btn.addEventListener('click',()=>{
-  document.querySelectorAll('[data-filter]').forEach(b=>b.classList.toggle('active',b===btn));
-  drawProjects();
-}));
+// Los eventos de los filtros se asignan dinámicamente en buildCategoryFilters().
 searchInput.addEventListener('input',drawProjects);
 
 function renderGallery(){
@@ -125,6 +152,11 @@ async function loadProjects(){
   if(!response.ok)throw new Error('HTTP '+response.status);
   const data=await response.json();if(!Array.isArray(data))throw new Error('Formato inválido');
   projects=data.filter(p=>p&&p.featured!==false);
+  try {
+    const categoryResponse=await fetch('./data/categorias.json',{cache:'no-store'});
+    if(categoryResponse.ok){const list=await categoryResponse.json();if(Array.isArray(list))managedCategories=list;}
+  }catch(err){console.info('Sin catálogo de categorías; se usarán las existentes en los proyectos.',err);}
+  buildCategoryFilters();
   drawProjects();
  }catch(err){console.error('No fue posible cargar proyectos:',err);
   projectsContainer.replaceChildren(element('p','projects-error','No se pudieron cargar los proyectos. Comprueba data/proyectos.json.'));
