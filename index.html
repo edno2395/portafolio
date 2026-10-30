@@ -10,7 +10,7 @@
    Eder Nole | Ingeniero de Sistemas
   </title>
 <link href="https://res.cloudinary.com/dirukaz36/image/upload/v1728250136/icono_dv3mho.svg" rel="icon"/>
-<link href="./dist/css/style.css?v=20" rel="stylesheet"/>
+<link href="./dist/css/style.css?v=22" rel="stylesheet"/>
 </head>
 <body>
 <header class="header">
@@ -166,7 +166,7 @@
 <div class="section-heading">
 <div>
 <h2>
-        Proyectos seleccionados
+        Proyectos
        </h2>
 <p>
         Una muestra de soluciones y aplicaciones desarrolladas.
@@ -184,7 +184,19 @@
        </button>
 </div>
 </div>
-<div aria-live="polite" class="projects" id="projects-list"><p class="projects-loading">Cargando proyectos…</p></div>
+<div class="projects-toolbar">
+  <label class="projects-search" for="project-search">
+    <span aria-hidden="true">⌕</span>
+    <input id="project-search" type="search" placeholder="Buscar por proyecto o tecnología..." autocomplete="off" aria-label="Buscar proyectos" />
+  </label>
+  <span id="projects-counter" class="projects-counter" aria-live="polite"></span>
+</div>
+<div aria-live="polite" class="projects projects-carousel" id="projects-list" tabindex="0" role="region" aria-roledescription="carrusel" aria-label="Proyectos publicados"><p class="projects-loading">Cargando proyectos…</p></div>
+<div class="projects-carousel-controls" aria-label="Controles del carrusel">
+  <button type="button" class="carousel-arrow" id="projects-prev" aria-label="Ver proyectos anteriores">&#8592;</button>
+  <span class="projects-position" id="projects-position" aria-live="polite">Explora los proyectos</span>
+  <button type="button" class="carousel-arrow" id="projects-next" aria-label="Ver proyectos siguientes">&#8594;</button>
+</div>
 </div>
 </section>
 <section class="section container contact" id="contacto">
@@ -263,7 +275,7 @@
 </dialog>
 <script defer="" src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js">
 </script>
-<script defer="" src="./dist/js/main.js?v=20">
+<script defer="" src="./dist/js/main.js?v=22">
 </script>
 <a aria-label="Conversar por WhatsApp" class="wa-floating" href="https://wa.me/51979371626" rel="noopener noreferrer" target="_blank">
    WhatsApp ↗
