@@ -1,0 +1,22 @@
+[
+  {
+    "id": "sistemas",
+    "name": "Sistemas"
+  },
+  {
+    "id": "web",
+    "name": "Web"
+  },
+  {
+    "id": "automatizacion",
+    "name": "Automatización"
+  },
+  {
+    "id": "scripts",
+    "name": "Scripts / PowerShell"
+  },
+  {
+    "id": "datos",
+    "name": "Bases de datos"
+  }
+]
