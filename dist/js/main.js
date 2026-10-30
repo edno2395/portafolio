@@ -1,319 +1,191 @@
+// Los proyectos se leen de data/proyectos.json. No hay que modificar HTML al agregar uno.
+let projects = [];
+const projectsContainer = document.getElementById('projects-list');
+const gallery = document.getElementById('gallery');
+const dlg = gallery;
+const img = document.getElementById('gallery-img');
+const count = document.getElementById('gallery-count');
+let current = 0, index = 0;
 
-		
-		document.addEventListener("DOMContentLoaded", function() {
+document.getElementById('year').textContent = new Date().getFullYear();
+const menu=document.querySelector('.menu-toggle'), links=document.querySelector('.nav-links');
+menu.addEventListener('click',()=>{const open=links.classList.toggle('open');menu.setAttribute('aria-expanded',String(open));});
+links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{links.classList.remove('open');menu.setAttribute('aria-expanded','false');}));
+function applyFilter(){
+ const active=document.querySelector('[data-filter].active')?.dataset.filter||'todos';
+ document.querySelectorAll('.project').forEach(card=>{card.hidden=active!=='todos'&&card.dataset.category!==active;});
+}
+document.querySelectorAll('[data-filter]').forEach(btn=>btn.addEventListener('click',()=>{
+ document.querySelectorAll('[data-filter]').forEach(b=>b.classList.toggle('active',b===btn));applyFilter();
+}));
+function element(tag, className, content){
+ const el=document.createElement(tag);if(className)el.className=className;
+ if(content!==undefined)el.textContent=content;return el;
+}
+function drawProjects(){
+ projectsContainer.replaceChildren();
+ projects.forEach((p,i)=>{
+  const article=element('article','project');article.dataset.category=p.category||'sistemas';
+  const cover=element('div','project-cover');const pic=element('img');
+  pic.src=p.images?.[0]||'';pic.alt='Vista previa de '+p.title;pic.loading='lazy';pic.decoding='async';
+  cover.append(pic);
+  const body=element('div','project-body');
+  body.append(element('span','eyebrow','PROYECTO '+String(i+1).padStart(2,'0')));
+  body.append(element('h3','',p.title));
+  body.append(element('p','',p.description||''));
+  if(p.technologies)body.append(element('p','project-technologies',p.technologies));
+  const button=element('button','project-button','Explorar proyecto ↗');button.type='button';
+  button.addEventListener('click',()=>{
+   current=i;index=0;renderGallery();
+   if(typeof dlg.showModal==='function')dlg.showModal();else dlg.setAttribute('open','');
+  });
+  body.append(button);article.append(cover,body);projectsContainer.append(article);
+ });
+ if(!projects.length)projectsContainer.append(element('p','','Todavía no hay proyectos publicados.'));
+ applyFilter();
+}
+function renderGallery(){
+ const p=projects[current];if(!p)return;
+ const images=Array.isArray(p.images)&&p.images.length?p.images:[''];
+ img.src=images[index];img.alt=`${p.title} — imagen ${index+1}`;
+ count.textContent=`${index+1} / ${images.length}`;
+ document.getElementById('gallery-title').textContent=p.title;
+}
+document.getElementById('gallery-close').addEventListener('click',()=>dlg.close());
+document.getElementById('gallery-prev').addEventListener('click',()=>{
+ const n=projects[current]?.images?.length||1;index=(index-1+n)%n;renderGallery();
+});
+document.getElementById('gallery-next').addEventListener('click',()=>{
+ const n=projects[current]?.images?.length||1;index=(index+1)%n;renderGallery();
+});
+async function loadProjects(){
+ try{
+  const response=await fetch('./data/proyectos.json',{cache:'no-cache'});
+  if(!response.ok)throw new Error('HTTP '+response.status);
+  const data=await response.json();if(!Array.isArray(data))throw new Error('Formato inválido');
+  projects=data.filter(p=>p&&p.featured!==false);
+  drawProjects();
+ }catch(err){console.error('No fue posible cargar proyectos:',err);
+  projectsContainer.replaceChildren(element('p','projects-error','No se pudieron cargar los proyectos. Comprueba data/proyectos.json.'));
+ }
+}
+loadProjects();
 
-			const whatsappIcon = document.createElement("div");
-			whatsappIcon.id = "whatsapp-icon";
-			whatsappIcon.innerHTML = `
-			  <a href="https://wa.me/+51973502271" target="_blank" aria-label="Contactar por WhatsApp">
-				<i class="fab fa-whatsapp fa-bounce"></i>
-			  </a>`;
-			document.body.appendChild(whatsappIcon);
-		  
-			const style = document.createElement("style");
-			style.innerHTML = `
-			 
-			  #whatsapp-icon {
-				position: fixed;
-				bottom: 20px;
-				right: 20px;
-				z-index: 1000;
-				background: linear-gradient(45deg, #25d366, #128c7e);
-				border-radius: 50%;
-				width: 60px;
-				height: 60px;
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-				cursor: pointer;
-				transition: transform 0.3s ease, box-shadow 0.3s ease;
-			  }
-		  
-			  #whatsapp-icon:hover {
-				transform: scale(1.1);
-				box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-			  }
-		  
-			  #whatsapp-icon a {
-				color: white;
-				font-size: 30px;
-				text-decoration: none;
-			  }
-			`;
-			document.head.appendChild(style);
+const FORMSPREE_FORM_ID = 'meaalkwr';
+const WHATSAPP_NUMBER = '51979371626';
+const contactForm = document.getElementById('contact-form');
+const submitButton = contactForm.querySelector('button[type="submit"]');
+const whatsappButton = document.getElementById('contact-whatsapp');
+const formStatus = document.getElementById('form-status');
+const initialButtonText = submitButton.textContent.trim();
+let sending = false;
 
-			var mensaje = document.getElementById("mensaje");
-			var contador = document.getElementById("contador");
-
-			mensaje.addEventListener("input", function () {
-				var init = mensaje.value.length;
-				var total_characters = 200 - init;
-
-				if (total_characters >= 0) {
-					contador.textContent = total_characters + " caracteres restantes";
-				} else {
-					// Limitar los caracteres cuando se supera el límite
-					mensaje.value = mensaje.value.substring(0, 200);
-					contador.textContent = "0 caracteres restantes";
-				}
-			});
-		});
-
-
-
-
-		function verificaletrasInput(m) {
-			var permitidoletras = /[^a-zA-Z\u00E0-\u00FC\u00C0-\u00DC\u00f1\u00d1 .]/;
-			if (permitidoletras.test(m.value)) {
-				Alerta('warning', 'Advertencia!', 'Campo nombre no acepta numeros', 2100);
-			  m.value = m.value.replace(/[^a-zA-Z\u00E0-\u00FC\u00C0-\u00DC\u00f1\u00d1 .]/g, ''); // Elimina caracteres no válidos
-			  m.focus();
-			}
-		  }
-		  
-		
-        function mostrarSobreMi(event) {
-            event.preventDefault();
-            document.getElementById('contenido').classList.remove('d-none');
-            document.getElementById('formularioContacto').classList.add('d-none');
-            document.getElementById('contenidoProyectos').classList.add('d-none');
-        }
-
-        function mostrarContacto(event) {
-            event.preventDefault();
-            document.getElementById('contenido').classList.add('d-none');
-            document.getElementById('formularioContacto').classList.remove('d-none');
-            document.getElementById('contenidoProyectos').classList.add('d-none');
-        }
-
-        function mostrarProyectos(event) {
-            event.preventDefault();
-            document.getElementById('contenido').classList.add('d-none');
-            document.getElementById('formularioContacto').classList.add('d-none');
-            document.getElementById('contenidoProyectos').classList.remove('d-none');
-        }
-		
-		
-		function openCarousel(cardNumber) {
-    const imageSets = {
-        1: [
-            "https://res.cloudinary.com/dirukaz36/image/upload/v1728176167/imagen1_gmwxsg.webp",
-            "https://res.cloudinary.com/dirukaz36/image/upload/v1728176405/imagen2_s3eauz.webp",
-            "https://res.cloudinary.com/dirukaz36/image/upload/v1728176344/imagen3_jdi6ue.webp",
-            "https://res.cloudinary.com/dirukaz36/image/upload/v1728176392/imagen4_gusvwi.webp",
-            "https://res.cloudinary.com/dirukaz36/image/upload/v1728176343/imagen5_snqizf.webp",
-            "https://res.cloudinary.com/dirukaz36/image/upload/v1728176341/imagen6_vgmvzn.webp",
-            "https://res.cloudinary.com/dirukaz36/image/upload/v1728176341/imagen7_bzr0mb.webp",
-            "https://res.cloudinary.com/dirukaz36/image/upload/v1728176340/imagen8_g4yblr.webp",
-            "https://res.cloudinary.com/dirukaz36/image/upload/v1728176437/imagen9_wfofgf.webp",
-            "https://res.cloudinary.com/dirukaz36/image/upload/v1728176437/imagen10_1_g4pzez.webp",
-        ],
-        2: [
-            "https://res.cloudinary.com/dirukaz36/image/upload/v1728179984/imagen1_vhzs1w.webp",
-            "https://res.cloudinary.com/dirukaz36/image/upload/v1728179984/imagen2_fdfkpp.webp",
-            "https://res.cloudinary.com/dirukaz36/image/upload/v1728179984/imagen3_trbn70.webp",
-            "https://res.cloudinary.com/dirukaz36/image/upload/v1728179984/imagen4_hvawxi.webp",
-            "https://res.cloudinary.com/dirukaz36/image/upload/v1728179983/imagen5_vyedlo.webp",
-            "https://res.cloudinary.com/dirukaz36/image/upload/v1728179983/imagen6_ujxpsv.webp",
-            "https://res.cloudinary.com/dirukaz36/image/upload/v1728179983/imagen7_ovllrh.webp",
-            "https://res.cloudinary.com/dirukaz36/image/upload/v1728179983/imagen8_y6toyb.webp",
-            "https://res.cloudinary.com/dirukaz36/image/upload/v1728179983/imagen9_clws0c.webp",
-            "https://res.cloudinary.com/dirukaz36/image/upload/v1728179983/imagen10_ene55t.webp",
-        ],
-        3: [
-            "https://res.cloudinary.com/dirukaz36/image/upload/v1728181285/imagen1_n2hs4v.webp",
-            "https://res.cloudinary.com/dirukaz36/image/upload/v1728181285/imagen2_s8b2u6.webp",
-            "https://res.cloudinary.com/dirukaz36/image/upload/v1728181285/imagen3_n1kzga.webp",
-            "https://res.cloudinary.com/dirukaz36/image/upload/v1728181285/imagen4_ckrhyn.webp",
-            "https://res.cloudinary.com/dirukaz36/image/upload/v1728181285/imagen5_kyjknp.webp",
-            "https://res.cloudinary.com/dirukaz36/image/upload/v1728181432/imagen6_yhuhl1.webp",
-            "https://res.cloudinary.com/dirukaz36/image/upload/v1728181432/imagen7_ngcsgd.webp",
-            "https://res.cloudinary.com/dirukaz36/image/upload/v1728181432/imagen8_vrzgoh.webp",
-            "https://res.cloudinary.com/dirukaz36/image/upload/v1728181431/imagen9_hqndme.webp",
-        ],
-        4: [
-            "https://res.cloudinary.com/dirukaz36/image/upload/v1728182511/imagen1_pxsjnv.webp",
-			"https://res.cloudinary.com/dirukaz36/image/upload/v1728182509/imagen2_e8ut7r.webp",
-			"https://res.cloudinary.com/dirukaz36/image/upload/v1728182508/imagen3_q9fkao.webp",
-			"https://res.cloudinary.com/dirukaz36/image/upload/v1728182506/imagen4_q7mee5.webp",
-			"https://res.cloudinary.com/dirukaz36/image/upload/v1728182506/imagen5_qogufl.webp",
-			"https://res.cloudinary.com/dirukaz36/image/upload/v1728182504/imagen6_onbo4t.webp",
-			"https://res.cloudinary.com/dirukaz36/image/upload/v1728182503/imagen7_bi4iqt.webp",
-			"https://res.cloudinary.com/dirukaz36/image/upload/v1728182503/imagen8_uwotux.webp",
-			"https://res.cloudinary.com/dirukaz36/image/upload/v1728182503/imagen9_no6eh0.webp",
-
-        ],
-		5: [
-            "https://res.cloudinary.com/dirukaz36/image/upload/v1728195418/imagen1_s7aptp.webp",
-			"https://res.cloudinary.com/dirukaz36/image/upload/v1728195417/imagen2_pw1dfg.webp",
-			"https://res.cloudinary.com/dirukaz36/image/upload/v1728195416/imagen3_itecgg.webp",
-			"https://res.cloudinary.com/dirukaz36/image/upload/v1728195414/imagen4_tuqucq.webp",
-			"https://res.cloudinary.com/dirukaz36/image/upload/v1728195414/imagen5_ufrl6b.webp",
-			"https://res.cloudinary.com/dirukaz36/image/upload/v1728195414/imagen6_ieeah9.webp",
-			"https://res.cloudinary.com/dirukaz36/image/upload/v1728195413/imagen7_do3d04.webp",
-			"https://res.cloudinary.com/dirukaz36/image/upload/v1728195409/imagen8_fexcci.webp",
-			"https://res.cloudinary.com/dirukaz36/image/upload/v1728195410/imagen9_r9d10k.webp",
-			"https://res.cloudinary.com/dirukaz36/image/upload/v1728195409/imagen10_mmjkgz.webp",
-			"https://res.cloudinary.com/dirukaz36/image/upload/v1728195409/imagen11_jrjwuv.webp",
-			"https://res.cloudinary.com/dirukaz36/image/upload/v1728195409/imagen12_c4mtow.webp",
-			"https://res.cloudinary.com/dirukaz36/image/upload/v1728195409/imagen13_je902f.webp",
-			"https://res.cloudinary.com/dirukaz36/image/upload/v1728195409/imagen14_u1x7hh.webp",
-			"https://res.cloudinary.com/dirukaz36/image/upload/v1728195409/imagen15_uxcmf5.webp",
-        ]
-		
-    };
-
-    const carouselInner = document.getElementById('carouselInner');
-    carouselInner.innerHTML = ''; // Limpiar el contenido anterior
-
-    imageSets[cardNumber].forEach((src, index) => {
-        const isActive = index === 0 ? 'active' : '';
-        const carouselItem = `
-            <div class="carousel-item ${isActive}">
-                <img src="${src}" class="d-block w-100" alt="...">
-            </div>
-        `;
-        carouselInner.innerHTML += carouselItem;
+async function contactAlert(icon, title, text) {
+  if (window.Swal) {
+    return Swal.fire({
+      icon, title, text, confirmButtonText: 'Aceptar',
+      confirmButtonColor: '#2563eb',
+      customClass: { popup: 'contact-swal-popup' }
     });
-
-    // Mostrar la modal
-    const modal = new bootstrap.Modal(document.getElementById('modalCarousel'));
-    modal.show();
+  }
+  window.alert(title + '\n' + text);
+}
+function clearContactForm() {
+  contactForm.reset();
+  if (formStatus) formStatus.textContent = '';
+}
+function getMessage() {
+  return {
+    nombre: document.getElementById('nombre').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    mensaje: document.getElementById('mensaje').value.trim()
+  };
 }
 
-function deshabilitarCampos() {
-	document.getElementById('nombre').readOnly = true;
-	document.getElementById('mensaje').readOnly = true;
-	document.getElementById('Enviar').disabled  = true;
-}
-
-function habilitarCampos() {
-	document.getElementById('nombre').readOnly = false;
-	document.getElementById('mensaje').readOnly = false;
-	document.getElementById('Enviar').disabled  = false;
-}
-
-document.getElementById('mensaje').addEventListener('input', function() {
-        let value = this.value;
-        value = value.toLowerCase();
-        const sentences = value.split('. ');
-        for (let i = 0; i < sentences.length; i++) {
-            sentences[i] = sentences[i].charAt(0).toUpperCase() + sentences[i].slice(1);
-        }
-        this.value = sentences.join('. ');
+contactForm.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  if (sending || !contactForm.reportValidity()) return;
+  const { nombre, email, mensaje } = getMessage();
+  if (nombre.length < 2 || mensaje.length < 10) {
+    await contactAlert('warning', 'Revisa el formulario', 'Escribe tu nombre y un mensaje de al menos 10 caracteres.');
+    return;
+  }
+  sending = true;
+  submitButton.disabled = true;
+  submitButton.textContent = 'Enviando correo…';
+  try {
+    const data = new FormData(contactForm);
+    data.set('nombre', nombre);
+    data.set('email', email);
+    data.set('message', mensaje);
+    data.set('_subject', 'Nuevo mensaje del portafolio - ' + nombre);
+    const response = await fetch('https://formspree.io/f/' + FORMSPREE_FORM_ID, {
+      method: 'POST', body: data, headers: {'Accept': 'application/json'}
     });
+    if (!response.ok) {
+      let message = 'No se pudo enviar el correo. Intenta nuevamente.';
+      try {
+        const payload = await response.json();
+        if (Array.isArray(payload.errors) && payload.errors.length) {
+          message = payload.errors.map(e => e.message).filter(Boolean).join(' ');
+        }
+      } catch (_) {}
+      throw new Error(message);
+    }
+    clearContactForm();
+    await contactAlert('success', '¡Correo enviado!', 'Tu mensaje se envió correctamente. Gracias por contactarme.');
+  } catch (error) {
+    console.error('Error Formspree:', error);
+    // Si falla, NO se borra el mensaje para que se pueda volver a intentar.
+    await contactAlert('error', 'No se pudo enviar el correo', error.message || 'Verifica tu conexión e intenta nuevamente.');
+  } finally {
+    sending = false;
+    submitButton.disabled = false;
+    submitButton.textContent = initialButtonText;
+  }
+});
 
-        (function() {
-            emailjs.init("X783RjVlxwxWlE7eu"); // Reemplaza esto con tu USER ID de EmailJS
-        })();
-
-      document.getElementById('contactFormulario').addEventListener('submit', function(e) {
-			e.preventDefault();
-
-			// Obtener Campos
-			const nombre = document.getElementById('nombre').value.trim();
-			const mensaje = document.getElementById('mensaje').value.trim();
-
-			// Validaciones
-			if (nombre === '') {
-				Alerta('warning', 'Advertencia!', 'Complete todos los campos', 2200);
-				return false;
-			}
-			if (nombre.length < 10) {
-				Alerta('warning', 'Advertencia!', 'El campo nombre debe tener al menos 10 caracteres.', 2200);
-				return false;
-			}
-			if (mensaje === '') {
-				Alerta('warning', 'Advertencia!', 'Complete todos los campos', 2200);
-				return false;
-			}
-			if (mensaje.length < 10) {
-				Alerta('warning', 'Advertencia!', 'El campo mensaje debe tener al menos 10 caracteres', 2200);
-				return false;
-			}
-			deshabilitarCampos();
-			// SweetAlert con tres opciones
-			Swal.fire({
-				toast: true,
-				position: 'top',
-				title: '&#191;C&oacute;mo deseas contactar?',
-				html: "Elige una opci&oacute;n para continuar:",
-				icon: 'question',
-				showCancelButton: true,
-				confirmButtonText: '<i class="fas fa-envelope"></i> Correo',
-                cancelButtonText: '<i class="fas fa-times"></i> Cancelar',
-				denyButtonText: '<i class="fab fa-whatsapp"></i> WhatsApp', // Botón de WhatsApp
-				confirmButtonColor: '#3085d6', // Color para el botón de correo
-				cancelButtonColor: '#d33', // Color rojo para el botón de cancelar
-				denyButtonColor: '#25D366', // Color verde para el botón de WhatsApp
-				showDenyButton: true, // Mostrar el botón de cancelar
-			}).then((result) => {
-				if (result.isConfirmed) {
-					// Lógica para enviar el correo
-					emailjs.sendForm('service_gc9k6xd', 'template_xnothc7', document.getElementById('contactFormulario'))
-						.then(function() {
-							Alerta('success', '&Eacute;xito!', 'Correo enviado correctamente.', 2400);
-							// Limpiar el formulario después de enviar
-							document.getElementById('contactFormulario').reset();
-							// Resetea el contador de caracteres (si lo tienes)
-							document.getElementById('contador').innerText = '200 caracteres restantes';
-							habilitarCampos();
-						}, function(error) {
-							console.error('Error al enviar el correo:', error);
-							Alerta('error', 'Error!', 'Error al enviar el correo', 2400);
-							habilitarCampos();
-						});
-				} else if (result.isDenied) {
-					// Lógica para enviar el WhatsApp
-					const telefono = '+51973502271'; // Número de teléfono de destino
-					// Redirecciona a WhatsApp con el mensaje
-					const url = `https://wa.me/${telefono}?text=Hola, e visto tu portafolio y me estoy contactando contigo, mi nombre es ${nombre}. ${mensaje}`;
-					 //window.open(url, '_blank'); Abre el WhatsApp en una nueva pestaña
-					window.open(url,'Conctamos whatsapp','width=600,height=400,left=50,top=50,toolbar=yes');
-					document.getElementById('contactFormulario').reset();
-					document.getElementById('contador').innerText = '200 caracteres restantes';
-					habilitarCampos();
-				} else if (result.dismiss === Swal.DismissReason.cancel) {
-					// Limpiar el formulario al cancelar
-					Alerta('info', 'Cancelado!', 'Formulario cancelado.', 2400);
-					document.getElementById('contactFormulario').reset();
-					document.getElementById('contador').innerText = '200 caracteres restantes';
-					habilitarCampos();
-				}
-			});
-		});
-
-
-	
-       // Función para contar caracteres restantes
-        const mensajeTextarea = document.getElementById('mensaje');
-        mensajeTextarea.addEventListener('input', function() {
-            const maxLength = 200;
-            const currentLength = mensajeTextarea.value.length;
-            const remainingCharacters = maxLength - currentLength;
-
-            document.getElementById('contador').innerText = `${remainingCharacters} caracteres restantes`;
+whatsappButton.addEventListener('click', (event) => {
+  event.preventDefault();
+  const { nombre, email, mensaje } = getMessage();
+  const text = [
+    'Hola, vi tu portafolio y quiero contactarte.',
+    nombre && 'Mi nombre es ' + nombre + '.',
+    email && 'Mi correo es ' + email + '.',
+    mensaje
+  ].filter(Boolean).join('\n');
+  const link = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(text);
+  // No redirigimos esta pestaña. La opción "noopener" puede producir un
+  // retorno null aunque la nueva pestaña SÍ se haya abierto.
+  const opened = window.open(link, '_blank');
+  if (opened) {
+    opened.opener = null;
+    clearContactForm();
+  } else {
+    // El navegador puede bloquear ventanas emergentes: dejamos un enlace accionable.
+    if (window.Swal) {
+      Swal.fire({icon:'info',title:'Abrir WhatsApp',text:'Tu navegador bloqueó la nueva pestaña.',
+        showCancelButton:true,confirmButtonText:'Abrir WhatsApp',cancelButtonText:'Cerrar',confirmButtonColor:'#16a34a'}).then(result => {
+          if (result.isConfirmed) {
+            const anchor = document.createElement('a');
+            anchor.href = link; anchor.target = '_blank'; anchor.rel = 'noopener noreferrer';
+            document.body.appendChild(anchor); anchor.click(); anchor.remove();
+            clearContactForm();
+          }
         });
-		
-		
-		function Alerta(icono, titulo, texto, tiempo) {
-			Swal.fire({
-				toast: true,
-				icon: icono,
-				title: titulo,
-				text: texto,
-				showClass: {
-				popup: 'animate__animated  animate__slideInDown animate__faster '
-				},
-				hideClass: {
-				popup: 'animate__animated animate__bounceOutUp animate__faster'
-				},
-				timer: tiempo,
-				position: 'top',
-				showConfirmButton: false,
-				timerProgressBar: true
-			  });
-		}
-		
-				
+    } else {
+      window.alert('El navegador bloqueó la pestaña de WhatsApp. Autoriza ventanas emergentes y vuelve a intentarlo.');
+    }
+  }
+});
+// Allow arrow-key navigation when the gallery is open.
+document.addEventListener('keydown', e=>{
+  if (!dlg.open) return;
+  if (e.key==='ArrowLeft') document.getElementById('gallery-prev').click();
+  if (e.key==='ArrowRight') document.getElementById('gallery-next').click();
+});
+
+// Cerrar galería haciendo clic fuera del contenido.
+dlg.addEventListener("click", event => {
+  if (event.target === dlg) dlg.close();
+});
