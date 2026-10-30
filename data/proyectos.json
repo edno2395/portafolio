@@ -101,5 +101,30 @@
     "category": "sistemas",
     "technologies": "",
     "featured": true
+  },
+  {
+    "id": "proyecto-1793376966311",
+    "title": "Sistema de Gestión de Asientos Contables",
+    "description": "Solución desarrollada en Python para gestionar el procesamiento mensual de asientos contables de forma ordenada, controlada y trazable. El sistema organiza el flujo de trabajo en seis etapas: carga de archivos, cruces, generación de reportes, controles y backup, permitiendo consultar períodos anteriores, reprocesar meses específicos y mantener historial por período. Además, incorpora reportes personalizados, plantillas reutilizables, tablas maestras con vigencia por período y herramientas administrativas para mejorar la confiabilidad y eficiencia de la gestión contable.",
+    "category": "sistemas",
+    "technologies": "Python-Reportes-Excel-PDF/DOCX",
+    "images": [
+      "assets/proyectos/captura-1793376781512-k63q5.webp",
+      "assets/proyectos/captura-1793376789918-lolbq.webp",
+      "assets/proyectos/captura-1793376809763-vv3ui.webp",
+      "assets/proyectos/captura-1793376816281-eokah.webp",
+      "assets/proyectos/captura-1793376840822-dsnkp.webp",
+      "assets/proyectos/captura-1793376847831-b87bk.webp",
+      "assets/proyectos/captura-1793376854609-4awib.webp",
+      "assets/proyectos/captura-1793376861367-e9el3.webp",
+      "assets/proyectos/captura-1793376875247-patk0.webp",
+      "assets/proyectos/captura-1793376881889-magij.webp",
+      "assets/proyectos/captura-1793376891603-hyhmt.webp",
+      "assets/proyectos/captura-1793376899241-1243n.webp",
+      "assets/proyectos/captura-1793376908667-p53nm.webp",
+      "assets/proyectos/captura-1793376916280-02e2t.webp",
+      "assets/proyectos/captura-1793376924157-95vlj.webp"
+    ],
+    "featured": true
   }
 ]
