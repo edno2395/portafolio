@@ -93,6 +93,21 @@
     "featured": true
   },
   {
+    "id": "proyecto-1793415097044",
+    "title": "Sistema Web de Registro de Proyectos – UGEL Sullana",
+    "description": "Sistema web para el registro y gestión de proyectos institucionales de la UGEL Sullana, facilitando la administración y organización de la información.",
+    "category": "sistemas",
+    "technologies": "PHP puro · JavaScript · AJAX · MySQL · WebSocket · Laragon",
+    "images": [
+      "assets/proyectos/captura-1793415051719-3bifa.png",
+      "assets/proyectos/captura-1793415058695-xpmj4.png",
+      "assets/proyectos/captura-1793415065804-txkdg.png",
+      "assets/proyectos/captura-1793415074044-j8vtr.png",
+      "assets/proyectos/captura-1793415082243-05jmg.png"
+    ],
+    "featured": true
+  },
+  {
     "id": "proyecto-1",
     "title": "Sistema de Gestión de Ventas Restaurante",
     "description": "Sistema integral que gestiona caja, stock, clientes, proveedores, ventas, mesas, delivery y boletas electrónicas (SUNAT).",
