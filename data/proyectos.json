@@ -1,5 +1,18 @@
 [
   {
+    "id": "proyecto-1794695654569",
+    "title": "Extractor de datos de Archivos PDF",
+    "description": "Sistema en Python para automatizar la extracción y validación de datos de recibos PDF mediante OCR, con detección de duplicados, exportación a Excel, TXT y CSV, y auditoría de integridad SHA-256.",
+    "category": "automatizacion",
+    "technologies": "Python · PyQt6 · PyMuPDF · Tesseract OCR · SQLite · Multiprocessing · CSV · SHA-256",
+    "images": [
+      "assets/proyectos/captura-1794695506978-671v4.png",
+      "assets/proyectos/captura-1794695517898-jo3e9.png",
+      "assets/proyectos/captura-1794695565744-z81mn.png"
+    ],
+    "featured": true
+  },
+  {
     "id": "proyecto-1793376966311",
     "title": "Automatizacion Gestión de Asientos Contables",
     "description": "Se desarrollo en Python para automatizar procesos contables mensuales, realizar cruces y controles, generar reportes personalizados y respaldar información, con seguimiento e historial por período.",
