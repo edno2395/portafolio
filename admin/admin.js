@@ -227,7 +227,46 @@ async function loadVisitorStats() {
 $('refresh-visitor-stats')?.addEventListener('click',loadVisitorStats);
 loadVisitorStats();
 
-// Reinicio seguro por versionado del namespace: no expone claves administrativas del contador.
+// Reinicio seguro por versionado del namespace. Compatible con el index.html ofuscado.
+function updateObfuscatedVisitorCounter(html) {
+ const outerPattern=/document\.write\(unescape\("([\s\S]*?)"\)\);/;
+ const outerMatch=html.match(outerPattern);
+ if(!outerMatch)throw new Error('No se reconoció el formato ofuscado del index.html. No se realizaron cambios.');
+ let decodedHtml=unescape(outerMatch[1]);
+ const wrapperPattern=/var\s+_0x[\w$]+\s*=\s*'([A-Za-z0-9+/=]+)'/g;
+ let match, found=null;
+ while((match=wrapperPattern.exec(decodedHtml))!==null){
+  let decoded='';
+  try{decoded=decodeBase64(match[1]);}catch(_){continue;}
+  if(/const\s+NAMESPACE\s*=\s*'[^']+'\s*;/.test(decoded)){
+   found={encoded:match[1],decoded};
+   break;
+  }
+ }
+ if(!found)throw new Error('No se encontró el contador de visitas dentro del index.html, ni en su versión ofuscada. No se realizaron cambios.');
+ const namespacePattern=/const\s+NAMESPACE\s*=\s*'([^']+)'\s*;/;
+ const namespaceMatch=found.decoded.match(namespacePattern);
+ if(!namespaceMatch)throw new Error('Se encontró el script del contador, pero no su identificador. No se realizaron cambios.');
+ const current=namespaceMatch[1];
+ const versionMatch=current.match(/-r(\d+)$/);
+ const nextVersion=versionMatch?Number(versionMatch[1])+1:1;
+ const next=current.replace(/-r\d+$/,'')+'-r'+nextVersion;
+ let updated=found.decoded.replace(namespacePattern,`const NAMESPACE = '${next}';`);
+ const sessionPattern=/const\s+SESSION_FLAG\s*=\s*'eder_portfolio_visit_counted_v\d+'\s*;/;
+ if(sessionPattern.test(updated)){
+  updated=updated.replace(sessionPattern,`const SESSION_FLAG = 'eder_portfolio_visit_counted_v${nextVersion+1}';`);
+ }else{
+  throw new Error('Se encontró el identificador, pero no la versión de sesión del contador. No se realizaron cambios.');
+ }
+ const replacement=base64utf8(updated);
+ const escaped=found.encoded.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+ const exactPattern=new RegExp("(var\\s+_0x[\\w$]+\\s*=\\s*')"+escaped+"(')")
+ if(!exactPattern.test(decodedHtml))throw new Error('No se pudo actualizar el bloque ofuscado del contador. No se realizaron cambios.');
+ decodedHtml=decodedHtml.replace(exactPattern,`$1${replacement}$2`);
+ const newOuter=escape(decodedHtml);
+ return {html:html.replace(outerPattern,`document.write(unescape("${newOuter}"));`),namespace:next,version:nextVersion};
+}
+
 async function resetVisitorStats() {
  const button=$('reset-visitor-stats');
  if(!connected||!token){
@@ -242,26 +281,16 @@ async function resetVisitorStats() {
   $('visitor-stats-status').textContent='Preparando el reinicio y publicando en GitHub…';
   $('visitor-stats-status').classList.remove('error');
   const file=await gh('index.html');
-  let html=decodeBase64(file.content);
-  const namespacePattern=/const NAMESPACE = '([^']+)';/;
-  const match=html.match(namespacePattern);
-  if(!match)throw new Error('No se encontró el identificador del contador en index.html. No se realizaron cambios.');
-  const current=match[1];
-  const versionMatch=current.match(/-r(\d+)$/);
-  const nextVersion=versionMatch?Number(versionMatch[1])+1:1;
-  const next=current.replace(/-r\d+$/,'')+'-r'+nextVersion;
-  html=html.replace(namespacePattern,`const NAMESPACE = '${next}';`);
-  html=html.replace(/const SESSION_FLAG = 'eder_portfolio_visit_counted_v\d+';/,`const SESSION_FLAG = 'eder_portfolio_visit_counted_v${nextVersion+1}';`);
-  const result=await gh('index.html','PUT',{
+  const originalHtml=decodeBase64(file.content);
+  const updated=updateObfuscatedVisitorCounter(originalHtml);
+  await gh('index.html','PUT',{
    message:'Reiniciar contador de visitas del portafolio',
-   content:base64utf8(html),sha:file.sha,branch:config().branch
+   content:base64utf8(updated.html),sha:file.sha,branch:config().branch
   });
-  VISITOR_COUNTER_NAMESPACE=next;
+  VISITOR_COUNTER_NAMESPACE=updated.namespace;
   $('visitor-total').textContent='0';
   $('visitor-today').textContent='0';
-  $('visitor-stats-status').textContent='Contador reiniciado. GitHub recibió el cambio; espera a que Pages publique la nueva versión.';
-  // Evita mostrar cifras de la versión anterior si la recarga se hace antes de desplegar Pages.
-  button.disabled=false;
+  $('visitor-stats-status').textContent='Contador reiniciado correctamente. GitHub recibió el cambio; espera a que Pages publique la nueva versión.';
  } catch(error) {
   $('visitor-stats-status').textContent='No se pudo reiniciar: '+error.message;
   $('visitor-stats-status').classList.add('error');
