@@ -141,7 +141,11 @@
     "featured": true
   },
   {
+    "id": "proyecto-2",
     "title": "Sistema de Gestión de Ventas Tienda Abarrotes",
+    "description": "Sistema eficiente para tiendas de abarrotes que escanea códigos, imprime tickets, controla stock y ofrece seguridad al acceso.",
+    "category": "sistemas",
+    "technologies": "PHP Puro-HTML-Javascript-Mysql",
     "images": [
       "https://res.cloudinary.com/dirukaz36/image/upload/v1728179984/imagen1_vhzs1w.webp",
       "https://res.cloudinary.com/dirukaz36/image/upload/v1728179984/imagen2_fdfkpp.webp",
@@ -154,10 +158,6 @@
       "https://res.cloudinary.com/dirukaz36/image/upload/v1728179983/imagen9_clws0c.webp",
       "https://res.cloudinary.com/dirukaz36/image/upload/v1728179983/imagen10_ene55t.webp"
     ],
-    "id": "proyecto-2",
-    "description": "Sistema eficiente para tiendas de abarrotes que escanea códigos, imprime tickets, controla stock y ofrece seguridad al acceso.",
-    "category": "sistemas",
-    "technologies": "",
     "featured": true
   },
   {
