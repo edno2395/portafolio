@@ -188,3 +188,84 @@ $('upload').addEventListener('click',async()=>{
 });
 // Inicio: cargar lista local para que el panel muestre proyectos incluso sin conectarse.
 $('local').click();
+
+
+// Estadísticas básicas del portafolio (lectura; no incrementa los contadores).
+const VISITOR_COUNTER_API = 'https://abacus.jasoncameron.dev';
+let VISITOR_COUNTER_NAMESPACE = 'eder-nole-portfolio-yE9H5KyDV36N1lLjwO7ft95b';
+function limaTodayCounterKey() {
+ const parts=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Lima',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+ const values=Object.fromEntries(parts.map(part=>[part.type,part.value]));
+ return 'visitas-'+values.year+'-'+values.month+'-'+values.day;
+}
+async function readVisitorCounter(key) {
+ const url=VISITOR_COUNTER_API+'/get/'+encodeURIComponent(VISITOR_COUNTER_NAMESPACE)+'/'+encodeURIComponent(key);
+ const response=await fetch(url,{cache:'no-store'});
+ if(response.status===404)return 0;
+ if(!response.ok)throw new Error('El servicio de estadísticas respondió '+response.status+'.');
+ const data=await response.json();
+ const value=Number(data.value);
+ if(!Number.isFinite(value))throw new Error('El servicio devolvió un contador inválido.');
+ return value;
+}
+async function loadVisitorStats() {
+ const button=$('refresh-visitor-stats'),status=$('visitor-stats-status');
+ if(!status)return;
+ if(button)button.disabled=true;
+ status.textContent='Actualizando estadísticas…';status.classList.remove('error');
+ try {
+  const [total,today]=await Promise.all([readVisitorCounter('total-visitas'),readVisitorCounter(limaTodayCounterKey())]);
+  $('visitor-total').textContent=total.toLocaleString('es-PE');
+  $('visitor-today').textContent=today.toLocaleString('es-PE');
+  $('visitor-date').textContent='Hoy · '+new Intl.DateTimeFormat('es-PE',{timeZone:'America/Lima',dateStyle:'long'}).format(new Date());
+  status.textContent='Estadísticas actualizadas correctamente.';
+ } catch(error) {
+  status.textContent='No se pudieron cargar las estadísticas. '+error.message;
+  status.classList.add('error');
+ } finally {if(button)button.disabled=false;}
+}
+$('refresh-visitor-stats')?.addEventListener('click',loadVisitorStats);
+loadVisitorStats();
+
+// Reinicio seguro por versionado del namespace: no expone claves administrativas del contador.
+async function resetVisitorStats() {
+ const button=$('reset-visitor-stats');
+ if(!connected||!token){
+  const message='Primero conecta con GitHub usando un token con permiso Contents: Read and write.';
+  $('visitor-stats-status').textContent=message;
+  $('visitor-stats-status').classList.add('error');
+  return;
+ }
+ if(!confirm('¿Reiniciar las visitas? Los contadores visibles comenzarán desde cero. El historial anterior no se borra del servicio, pero dejará de mostrarse.'))return;
+ try {
+  button.disabled=true;
+  $('visitor-stats-status').textContent='Preparando el reinicio y publicando en GitHub…';
+  $('visitor-stats-status').classList.remove('error');
+  const file=await gh('index.html');
+  let html=decodeBase64(file.content);
+  const namespacePattern=/const NAMESPACE = '([^']+)';/;
+  const match=html.match(namespacePattern);
+  if(!match)throw new Error('No se encontró el identificador del contador en index.html. No se realizaron cambios.');
+  const current=match[1];
+  const versionMatch=current.match(/-r(\d+)$/);
+  const nextVersion=versionMatch?Number(versionMatch[1])+1:1;
+  const next=current.replace(/-r\d+$/,'')+'-r'+nextVersion;
+  html=html.replace(namespacePattern,`const NAMESPACE = '${next}';`);
+  html=html.replace(/const SESSION_FLAG = 'eder_portfolio_visit_counted_v\d+';/,`const SESSION_FLAG = 'eder_portfolio_visit_counted_v${nextVersion+1}';`);
+  const result=await gh('index.html','PUT',{
+   message:'Reiniciar contador de visitas del portafolio',
+   content:base64utf8(html),sha:file.sha,branch:config().branch
+  });
+  VISITOR_COUNTER_NAMESPACE=next;
+  $('visitor-total').textContent='0';
+  $('visitor-today').textContent='0';
+  $('visitor-stats-status').textContent='Contador reiniciado. GitHub recibió el cambio; espera a que Pages publique la nueva versión.';
+  // Evita mostrar cifras de la versión anterior si la recarga se hace antes de desplegar Pages.
+  button.disabled=false;
+ } catch(error) {
+  $('visitor-stats-status').textContent='No se pudo reiniciar: '+error.message;
+  $('visitor-stats-status').classList.add('error');
+ } finally {button.disabled=false;}
+}
+$('reset-visitor-stats')?.addEventListener('click',resetVisitorStats);
+

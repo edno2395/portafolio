@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Administrador de proyectos · Eder Nole</title><link rel="stylesheet" href="./admin.css?v=3"><style>
+<title>Administrador de proyectos · Eder Nole</title><link rel="stylesheet" href="./admin.css?v=4"><style>
 /* Pantalla de acceso al panel */
 #admin-app[hidden],#admin-login[hidden]{display:none!important}
 #admin-login{min-height:100vh;display:grid;place-items:center;padding:24px;background:linear-gradient(135deg,#eff5ff,#f8fafc 60%,#e7effb);font-family:system-ui,Arial,sans-serif;color:#10243a}
@@ -35,6 +35,18 @@
 <div class="connection"><label>Usuario u organización de GitHub<input id="owner" placeholder="tu-usuario" autocomplete="off" required></label><label>Repositorio<input id="repo" placeholder="nombre-del-repositorio" autocomplete="off" required></label><label>Rama de publicación<input id="branch" value="main" autocomplete="off" required></label><label>Token Fine-grained (no se guarda)<input id="token" type="password" placeholder="github_pat_..." autocomplete="off" spellcheck="false"></label></div>
 <div class="toolbar"><button id="connect" class="btn dark" type="button">Conectar y cargar de GitHub</button><button id="local" class="btn" type="button">Cargar copia local</button><button id="download" class="btn" type="button">Descargar JSON</button></div>
 <p id="status" role="status" aria-live="polite"></p></section>
+<section class="panel" id="visitor-stats-panel">
+  <div class="section-heading">
+    <div><h2>Estadísticas de visitas</h2><p>Actividad registrada en tu portafolio público.</p></div>
+    <div class="toolbar"><button class="btn" id="refresh-visitor-stats" type="button">↻ Actualizar</button><button class="btn reset-visits" id="reset-visitor-stats" type="button">↺ Reiniciar visitas</button></div>
+  </div>
+  <div class="visitor-stats-grid">
+    <article class="visitor-stat"><span>Visitas totales</span><strong id="visitor-total">—</strong><small>Acumuladas desde la instalación</small></article>
+    <article class="visitor-stat"><span>Visitas de hoy</span><strong id="visitor-today">—</strong><small id="visitor-date">Fecha de Perú</small></article>
+  </div>
+  <p id="visitor-stats-status" class="visitor-stats-status" role="status" aria-live="polite">Cargando estadísticas…</p>
+  <p class="visitor-stats-note">Para reiniciar, el panel publica una nueva versión del identificador de visitas en GitHub. Los registros anteriores quedan archivados en el servicio y el nuevo contador comienza en cero.</p>
+</section>
 <section class="panel"><div class="section-heading"><div><h2>Mis proyectos <span id="count">0</span></h2><p>Los cambios que hagas se guardan al pulsar «Publicar en GitHub».</p></div><button id="add" class="btn dark" type="button">+ Agregar proyecto</button></div><div id="items" class="items"></div><div class="toolbar publish"><button id="publish" class="btn primary" type="button">Publicar cambios en GitHub</button><span id="dirty-note">Sin cambios pendientes</span></div></section>
 <section class="panel" id="category-panel">
   <div class="section-heading"><div><h2>Gestionar categorías</h2><p>Registra, renombra o elimina categorías y utilízalas al agregar proyectos.</p></div></div>
@@ -126,7 +138,7 @@
     if (!document.getElementById('admin-main-script')) {
       const script = document.createElement('script');
       script.id = 'admin-main-script';
-      script.src = './admin.js?v=3';
+      script.src = './admin.js?v=4';
       document.body.appendChild(script);
     }
   }

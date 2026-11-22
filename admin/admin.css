@@ -9,3 +9,17 @@
 .category-row .btn{padding:7px 11px}.category-row .delete-category{color:#b91c1c;border-color:#f5c7c7}
 .category-hint{font-size:12px!important;margin:12px 0 0!important}
 @media(max-width:600px){.category-row{flex-wrap:wrap}.category-row .category-name{flex-basis:100%}.category-row .category-code{margin-right:auto}}
+
+/* Estadísticas básicas de visitas */
+.visitor-stats-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:18px 0 12px}
+.visitor-stat{padding:20px;border:1px solid var(--line);border-radius:13px;background:linear-gradient(145deg,#fff,#f7faff);display:flex;flex-direction:column;gap:6px}
+.visitor-stat span{font-size:13px;color:var(--muted);font-weight:700}
+.visitor-stat strong{font-size:34px;line-height:1.2;letter-spacing:-1px;color:var(--navy);font-variant-numeric:tabular-nums}
+.visitor-stat small{font-size:12px;color:var(--muted)}
+.visitor-stats-status{min-height:20px;margin:10px 0 0!important;font-size:13px;font-weight:600}
+.visitor-stats-status.error{color:#b91c1c}
+.visitor-stats-note{font-size:12px!important;margin:8px 0 0!important}
+@media(max-width:600px){.visitor-stats-grid{grid-template-columns:1fr}.visitor-stat{padding:16px}}
+
+.reset-visits{color:#b91c1c;border-color:#efcaca;background:#fffafa}
+.reset-visits:hover{background:#fff0f0}
